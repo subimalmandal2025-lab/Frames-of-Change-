@@ -1,755 +1,881 @@
-bash
-
-cat > /mnt/user-data/outputs/curriculum.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Curriculum — Frames of Change · KMCP Film Studies</title>
-<meta name="description" content="18-week film studies curriculum for Grades 4–6 at KMCP Schools. Short films, student-led panels, and discussion questions on identity, climate, mental health, and justice.">
-<meta property="og:title" content="Frames of Change — Film Studies Curriculum">
-<meta property="og:description" content="18 Saturdays. 54 films. 4 big themes. A year-long curriculum for KMCP Grades 4–6.">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#080A0E">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Be The Change Project — Adarshanagar KMCP · Subimal's BTCP</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --black:#080A0E;
-  --deep:#0E1118;
-  --surface:#161B26;
-  --card:#1C2333;
-  --border:#2A3347;
-  --white:#F4F1EC;
-  --muted:#8A94A8;
-  --gold:#C9A84C;
-  --goldl:#E8C96A;
-  --teal:#4CA8A8;
+  --ink:#0f0e0b;
+  --ink-mid:#3d3830;
+  --ink-light:#7a6f62;
+  --bg:#faf8f4;
+  --bg-warm:#f5f0e8;
+  --bg-card:#ffffff;
+  --gold:#b8872c;
+  --gold-light:#d4a84b;
+  --gold-pale:#f7edda;
+  --gold-ultra:#fdf5e6;
+  --ruby:#8b1a2e;
+  --ruby-mid:#a8203a;
+  --ruby-pale:#f8ecee;
+  --teal:#1e5c4a;
+  --teal-pale:#e4f0ec;
+  --blue:#1e3a6e;
+  --blue-pale:#e8eef8;
+  --border:rgba(15,14,11,0.1);
+  --border-mid:rgba(15,14,11,0.18);
+  --shadow:0 2px 24px rgba(15,14,11,0.07);
+  --shadow-lg:0 8px 48px rgba(15,14,11,0.12);
 }
 html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden}
-
-/* ── SITE-WIDE TOP NAV ── */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(8,10,14,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.1);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px}
-.site-nav-logo{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--gold);text-decoration:none;letter-spacing:0.5px;white-space:nowrap}
-.site-nav-logo span{color:var(--white)}
-.site-nav-links{display:flex;align-items:center;gap:4px}
-.site-nav-links a{font-size:13px;letter-spacing:0.3px;color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:4px;transition:all 0.2s;white-space:nowrap;border:1px solid transparent;font-weight:500}
-.site-nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.06)}
-.site-nav-links a.active{color:var(--gold);border-color:rgba(201,168,76,0.2);background:rgba(201,168,76,0.06)}
-.site-nav-links a.nav-pill{background:rgba(201,168,76,0.12);color:var(--gold);border-color:rgba(201,168,76,0.25);font-weight:600}
-.site-nav-links a.nav-pill:hover{background:rgba(201,168,76,0.2)}
-.site-nav-ham{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:8px;background:none;border:none}
-.site-nav-ham span{display:block;width:20px;height:2px;background:var(--muted);border-radius:1px}
-.mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(8,10,14,0.98);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.1);padding:16px 24px;z-index:199;flex-direction:column;gap:4px}
-.mobile-menu.open{display:flex}
-.mobile-menu a{font-size:13px;color:var(--muted);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--border);font-weight:500}
-.mobile-menu a:last-child{border-bottom:none}
-.mobile-menu a.active,.mobile-menu a.nav-pill{color:var(--gold)}
-
-/* ── PAGE NAV ── */
-.page-nav{position:sticky;top:56px;z-index:100;padding:0 48px;background:rgba(8,10,14,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.08)}
-.page-nav-inner{display:flex;overflow-x:auto;scrollbar-width:none}
-.page-nav-inner::-webkit-scrollbar{display:none}
-.page-nav a{font-size:12px;font-weight:500;letter-spacing:0.3px;color:var(--muted);text-decoration:none;padding:13px 16px;white-space:nowrap;border-bottom:2px solid transparent;transition:all 0.2s}
-.page-nav a:hover,.page-nav a.active{color:var(--gold);border-bottom-color:var(--gold)}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7}
 
 /* ── HERO ── */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 48px 80px;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(201,168,76,0.06) 0%,transparent 70%),radial-gradient(ellipse 50% 80% at 10% 80%,rgba(201,168,76,0.04) 0%,transparent 60%);pointer-events:none}
-.hero-film-strip{position:absolute;right:-20px;top:0;bottom:0;width:180px;opacity:0.07;pointer-events:none;overflow:hidden}
-.hero-film-strip-inner{display:flex;flex-direction:column;animation:filmroll 20s linear infinite}
-.film-hole-row{display:flex;justify-content:space-between;padding:0 16px;margin:8px 0}
-.film-hole{width:16px;height:12px;border:2px solid var(--white);border-radius:2px}
-.film-frame{height:100px;border:1px solid var(--white);margin:0 8px}
-@keyframes filmroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
-.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:24px;opacity:0;animation:fadeup 0.8s 0.2s forwards}
-.eyebrow-line{width:40px;height:1px;background:var(--gold)}
-.eyebrow-text{font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(52px,7vw,96px);font-weight:900;line-height:0.95;letter-spacing:-2px;max-width:800px;opacity:0;animation:fadeup 0.8s 0.4s forwards}
-.hero h1 em{font-style:italic;color:var(--gold)}
-.hero-sub{font-size:18px;font-weight:300;color:var(--muted);max-width:520px;margin-top:28px;line-height:1.6;opacity:0;animation:fadeup 0.8s 0.6s forwards}
-.hero-meta{display:flex;gap:40px;margin-top:48px;opacity:0;animation:fadeup 0.8s 0.8s forwards}
-.hero-stat{border-left:2px solid var(--gold);padding-left:16px}
-.hero-stat strong{display:block;font-size:28px;font-family:'Playfair Display',serif;font-weight:700}
-.hero-stat span{font-size:13px;color:var(--muted)}
-.hero-actions{display:flex;gap:16px;margin-top:48px;opacity:0;animation:fadeup 0.8s 1s forwards;flex-wrap:wrap}
-.btn-primary{background:var(--gold);color:var(--black);padding:14px 32px;border-radius:4px;font-weight:600;font-size:15px;text-decoration:none;letter-spacing:0.3px;transition:all 0.2s}
-.btn-primary:hover{background:var(--goldl);transform:translateY(-1px)}
-.btn-secondary{border:1px solid var(--border);color:var(--white);padding:14px 32px;border-radius:4px;font-weight:500;font-size:15px;text-decoration:none;transition:all 0.2s}
-.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
-.hero-scroll{position:absolute;bottom:40px;left:48px;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeup 0.8s 1.2s forwards}
-.scroll-line{width:40px;height:1px;background:var(--muted)}
-.scroll-text{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-@keyframes fadeup{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero{min-height:100vh;background:var(--ink);display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:80px 64px;position:relative;z-index:2}
+.hero-right{position:relative;overflow:hidden}
+.hero-right-inner{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.04)}
+.hero-right-cell{border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.06);letter-spacing:0.1em}
+.hero-accent{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(184,135,44,0.14) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
+.hero-accent-2{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(139,26,46,0.12) 0%,transparent 70%);bottom:0;left:0;pointer-events:none}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:40px}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--gold-light);opacity:0.6}
+.hero-eyebrow-text{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-light);opacity:0.8}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(48px,5.5vw,80px);font-weight:700;line-height:1.0;letter-spacing:-0.02em;color:#faf8f4;margin-bottom:12px}
+.hero h1 span{color:var(--gold-light);font-style:italic}
+.hero-desc{font-size:15px;color:rgba(250,248,244,0.55);max-width:480px;line-height:1.8;margin-bottom:56px;font-weight:300}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(255,255,255,0.08);padding-top:36px}
+.hero-stat{padding-right:24px;border-right:1px solid rgba(255,255,255,0.06)}
+.hero-stat:last-child{border-right:none}
+.hero-stat-n{font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:var(--gold-light);line-height:1}
+.hero-stat-l{font-size:10px;color:rgba(250,248,244,0.4);letter-spacing:0.08em;text-transform:uppercase;margin-top:6px;font-weight:500}
+.hero-scroll{position:absolute;bottom:48px;right:64px;display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3}
+.hero-scroll span{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(250,248,244,0.25);writing-mode:vertical-rl}
+.hero-scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,rgba(250,248,244,0.25),transparent)}
+
+/* ── NAV ── */
+.nav{background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:100;padding:0 64px}
+.nav-inner{display:flex;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav a{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,248,244,0.38);text-decoration:none;padding:15px 18px;white-space:nowrap;border-bottom:2px solid transparent;transition:all 0.2s;font-family:'JetBrains Mono',monospace}
+.nav a:hover{color:var(--gold-light);border-bottom-color:var(--gold)}
 
 /* ── LAYOUT ── */
-section{padding:100px 48px}
-.section-label{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.section-label .line{width:32px;height:1px;background:var(--gold)}
-.section-label span{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600}
-.section-title{font-family:'Playfair Display',serif;font-size:clamp(36px,4vw,56px);font-weight:700;line-height:1.1;letter-spacing:-1px;max-width:700px}
-.section-title em{font-style:italic;color:var(--gold)}
-.section-sub{color:var(--muted);font-size:16px;font-weight:300;max-width:560px;margin-top:16px;line-height:1.7}
-.divider{height:1px;background:var(--border);margin:0 48px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 64px}
+.section{padding:96px 0}
+.section-sm{padding:72px 0}
+.section-dark{background:var(--ink);padding:96px 64px}
+.section-dark .wrap{padding:0}
+.section-warm{background:var(--bg-warm)}
+hr.div{border:none;border-top:1px solid var(--border);margin:0 64px}
 
-/* ── COUNTER STRIP ── */
-.counter-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px 48px;display:flex}
-.counter-item{flex:1;text-align:center;border-right:1px solid var(--border);padding:0 24px}
-.counter-item:last-child{border-right:none}
-.counter-item strong{display:block;font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:var(--gold)}
-.counter-item span{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+/* ── LABELS / HEADINGS ── */
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+.eyebrow-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.12em}
+.eyebrow-rule{width:32px;height:1px;background:var(--gold);opacity:0.45}
+.eyebrow-text{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.eyebrow-dark .eyebrow-num,.eyebrow-dark .eyebrow-text{color:var(--gold-light)}
+.eyebrow-dark .eyebrow-rule{background:var(--gold-light)}
+h2{font-family:'Playfair Display',serif;font-size:clamp(38px,4.5vw,62px);font-weight:600;line-height:1.05;letter-spacing:-0.02em;color:var(--ink);margin-bottom:20px}
+h2 em{font-style:italic;color:var(--ink-mid)}
+h2 i{font-style:italic;color:var(--ruby)}
+.dark h2{color:#faf8f4}
+.dark h2 em,.dark h2 i{color:var(--gold-light)}
+h3{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:var(--ink);margin-bottom:12px}
+.dark h3{color:#faf8f4}
+p.lead{font-size:17px;color:var(--ink-mid);line-height:1.85;margin-bottom:20px;max-width:700px;font-weight:300}
+p.body{font-size:15px;color:var(--ink-mid);line-height:1.85;margin-bottom:16px;max-width:680px}
+.dark p.lead,.dark p.body{color:rgba(250,248,244,0.65)}
 
-/* ── PITCH ── */
-#pitch{background:var(--deep)}
-.pitch-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:64px}
-.pitch-quote{font-family:'Playfair Display',serif;font-size:26px;font-style:italic;line-height:1.4;border-left:3px solid var(--gold);padding-left:28px;margin-bottom:32px}
-.pitch-body{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:20px}
-.pitch-body strong{color:var(--white);font-weight:500}
-.pitch-cards{display:flex;flex-direction:column;gap:16px}
-.pitch-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:24px;transition:border-color 0.2s}
-.pitch-card:hover{border-color:rgba(201,168,76,0.4)}
-.pitch-card-icon{font-size:20px;margin-bottom:10px}
-.pitch-card h4{font-size:15px;font-weight:600;margin-bottom:6px}
-.pitch-card p{font-size:13px;color:var(--muted);line-height:1.6}
-.pitch-highlight{background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:28px;margin-top:32px}
-.pitch-highlight h4{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px}
-.pitch-highlight p{font-size:15px;line-height:1.7}
+/* ── PULL QUOTE ── */
+.pq{border-left:3px solid var(--gold);padding:6px 32px;margin:40px 0;max-width:720px}
+.pq p{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;font-weight:400;line-height:1.5;color:var(--ink);margin:0;max-width:100%}
+.pq cite{display:block;font-family:'Inter',sans-serif;font-size:12px;font-style:normal;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-top:12px}
+.dark .pq p{color:rgba(250,248,244,0.9)}
+.dark .pq{border-left-color:var(--gold-light)}
 
-/* ── CURRICULUM ── */
-#curriculum{background:var(--black)}
-.terms-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:64px;border-radius:8px;overflow:hidden}
-.term-tile{background:var(--deep);padding:32px 24px;cursor:pointer;transition:background 0.2s}
-.term-tile:hover{background:var(--card)}
-.term-tile.active{background:var(--card)}
-.term-num{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px}
-.term-tile h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;line-height:1.2;margin-bottom:12px}
-.term-tile p{font-size:13px;color:var(--muted);line-height:1.5}
-.term-months{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;margin-top:12px}
-.weeks-container{margin-top:2px;background:var(--surface);border-radius:0 0 8px 8px;padding:40px}
-.weeks-header{margin-bottom:32px}
-.weeks-header h3{font-family:'Playfair Display',serif;font-size:28px;font-weight:700}
-.term-why-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px}
-.term-why-box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px}
-.term-why-box h5{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px}
-.term-why-box p{font-size:13px;color:var(--muted);line-height:1.55}
-.week-accordion{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px}
-.week-acc-head{display:flex;align-items:center;gap:16px;padding:18px 24px;cursor:pointer;transition:background 0.15s}
-.week-acc-head:hover{background:rgba(255,255,255,0.02)}
-.week-acc-head.open{background:rgba(201,168,76,0.05);border-bottom:1px solid var(--border)}
-.wk-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap;background:rgba(201,168,76,0.12);color:var(--gold)}
-.wk-title{font-size:15px;font-weight:500;flex:1}
-.wk-films-count{font-size:12px;color:var(--muted)}
-.wk-chevron{color:var(--muted);font-size:12px;transition:transform 0.2s}
-.week-acc-head.open .wk-chevron{transform:rotate(180deg)}
-.week-acc-body{display:none;padding:24px}
-.week-acc-body.open{display:block}
-.film-entry{display:grid;grid-template-columns:200px 1fr 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--border)}
-.film-entry:last-of-type{border-bottom:none}
-.film-entry-title{font-size:14px;font-weight:600;margin-bottom:4px}
-.film-entry-meta{font-size:12px;color:var(--muted);line-height:1.5}
-.film-link{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:12px;color:var(--gold);text-decoration:none}
-.film-link:hover{text-decoration:underline}
-.film-entry-addresses{font-size:13px;color:var(--muted)}
-.film-entry-addresses strong{color:var(--white);font-weight:500}
-.film-entry-learns{font-size:13px;color:var(--muted)}
-.film-entry-learns strong{color:var(--teal);font-weight:500}
-.lang-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;margin-left:5px;vertical-align:middle;background:rgba(255,255,255,0.08);color:var(--muted)}
-.short-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:4px;vertical-align:middle;background:rgba(201,168,76,0.15);color:var(--gold);text-transform:uppercase;letter-spacing:0.3px}
-.dq-section{margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
-.dq-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px}
-.dq-list{list-style:none}
-.dq-list li{font-size:13px;color:var(--muted);padding:7px 0 7px 20px;position:relative;border-bottom:1px solid rgba(255,255,255,0.04)}
-.dq-list li:last-child{border-bottom:none}
-.dq-list li::before{content:'?';position:absolute;left:0;color:var(--gold);font-weight:700;font-size:12px}
-.panel-box{background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:20px;margin-top:16px}
-.panel-box h5{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
-.panel-roles{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.role-chip{font-size:11px;border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:3px 10px;color:var(--gold)}
-.panel-prompt{font-size:13px;color:rgba(244,241,236,0.7);font-style:italic;line-height:1.6}
-.activity-box{background:rgba(76,168,168,0.06);border-left:2px solid var(--teal);padding:14px 18px;border-radius:0 8px 8px 0;margin-top:14px}
-.activity-box strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin-bottom:4px}
-.activity-box p{font-size:13px;color:var(--muted)}
+/* ── RUBY CONTEXT BLOCK ── */
+.ruby-block{background:linear-gradient(145deg,#1a0a10 0%,#240d14 50%,#1a1108 100%);border-radius:10px;padding:48px 52px;margin:48px 0;position:relative;overflow:hidden;border:1px solid rgba(139,26,46,0.25)}
+.ruby-block::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(168,32,58,0.18) 0%,transparent 65%);pointer-events:none}
+.ruby-block::after{content:'';position:absolute;bottom:-40px;left:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(184,135,44,0.1) 0%,transparent 65%);pointer-events:none}
+.ruby-block-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#c8607a;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.ruby-block-label::before{content:'';width:6px;height:6px;background:#c8607a;border-radius:50%;flex-shrink:0;box-shadow:0 0 8px rgba(200,96,122,0.5)}
+.ruby-block h3{color:#faf8f4;font-size:28px;margin-bottom:20px;position:relative;z-index:1}
+.ruby-block p{color:rgba(250,248,244,0.7);font-size:14.5px;max-width:100%;margin-bottom:14px;line-height:1.82;position:relative;z-index:1}
+.ruby-block p:last-of-type{margin-bottom:0}
+.ruby-block strong{color:var(--gold-light)}
+.rb-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;position:relative;z-index:1}
+.rb-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:6px;padding:18px 20px}
+.rb-item-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#c8607a;margin-bottom:6px}
+.rb-item-val{font-size:14px;color:rgba(250,248,244,0.8);line-height:1.6}
+.context-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;position:relative;z-index:1}
+.ctx-tag{font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.07em;padding:4px 12px;border-radius:20px;border:1px solid rgba(200,96,122,0.3);color:#d8889a;background:rgba(200,96,122,0.07)}
+
+/* ── PROBLEM GRID ── */
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);margin-top:48px;border:1px solid var(--border)}
+.prob-card{background:var(--bg-card);padding:36px 30px}
+.prob-icon{font-size:28px;margin-bottom:18px;display:block}
+.prob-card h4{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.2}
+.prob-card p{font-size:14px;color:var(--ink-mid);max-width:100%;margin:0;line-height:1.8}
+
+/* ── QUOTE WALL ── */
+.quote-wall{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.qw-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:32px 30px;position:relative;overflow:hidden;transition:box-shadow 0.2s}
+.qw-card:hover{box-shadow:var(--shadow-lg)}
+.qw-card::before{content:'\201C';position:absolute;top:-10px;left:18px;font-family:'Playfair Display',serif;font-size:120px;color:var(--gold-pale);line-height:1;pointer-events:none;z-index:0}
+.qw-quote{font-family:'Playfair Display',serif;font-size:17px;font-style:italic;line-height:1.65;color:var(--ink);margin-bottom:20px;position:relative;z-index:1;font-weight:400}
+.qw-attr{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.qw-line{width:24px;height:1px;background:var(--gold);flex-shrink:0}
+.qw-name{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:0.06em;text-transform:uppercase}
+.qw-role{font-size:11px;color:var(--ink-light);margin-top:2px;letter-spacing:0.04em}
+.qw-card.featured{background:var(--ink);grid-column:1/-1}
+.qw-card.featured::before{color:rgba(184,135,44,0.12)}
+.qw-card.featured .qw-quote{color:#faf8f4;font-size:22px}
+.qw-card.featured .qw-name{color:var(--gold-light)}
+.qw-card.featured .qw-role{color:rgba(250,248,244,0.45)}
+.qw-card.featured .qw-line{background:var(--gold-light)}
+
+/* ── NEP CARDS ── */
+.nep-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.nep-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-left:3px solid var(--gold);padding:26px 26px 26px 28px;border-radius:0 6px 6px 0}
+.nep-ref{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-light);margin-bottom:8px}
+.nep-card h4{font-family:'Playfair Display',serif;font-size:19px;font-weight:600;color:#faf8f4;margin-bottom:10px;line-height:1.3}
+.nep-card p{font-size:13.5px;color:rgba(250,248,244,0.62);max-width:100%;margin:0;line-height:1.75}
+
+/* ── SHORT FILM RATIONALE ── */
+.sf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.sf-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:30px 26px;transition:box-shadow 0.2s}
+.sf-card:hover{box-shadow:var(--shadow)}
+.sf-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.sf-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:400;color:var(--gold-pale);line-height:0.9}
+.sf-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:var(--gold-ultra);color:var(--gold);border:1px solid rgba(184,135,44,0.2)}
+.sf-card h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.sf-card p{font-size:13.5px;color:var(--ink-mid);max-width:100%;margin:0;line-height:1.78}
+
+/* ── SEL GRID ── */
+.sel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.sel-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:28px 24px;position:relative;overflow:hidden}
+.sel-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.sel-gold::after{background:linear-gradient(90deg,var(--gold),var(--gold-light))}
+.sel-ruby::after{background:linear-gradient(90deg,var(--ruby),var(--ruby-mid))}
+.sel-teal::after{background:linear-gradient(90deg,var(--teal),#2a8060)}
+.sel-blue::after{background:linear-gradient(90deg,var(--blue),#2a5aac)}
+.sel-card-icon{font-size:22px;margin-bottom:14px;display:block}
+.sel-card h4{font-family:'Playfair Display',serif;font-size:19px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.sel-card p{font-size:13.5px;color:var(--ink-mid);max-width:100%;margin:0;line-height:1.78}
 
 /* ── SHOWCASE ── */
-#showcase{background:var(--deep)}
-.showcase-intro{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:64px}
-.showcase-coming{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:48px;text-align:center}
-.showcase-coming-icon{font-size:48px;margin-bottom:16px;opacity:0.5}
-.showcase-coming h3{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:10px}
-.showcase-coming p{font-size:14px;color:var(--muted);line-height:1.6}
-.showcase-categories{display:flex;flex-direction:column;gap:12px}
-.showcase-cat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px 24px;display:flex;align-items:center;gap:16px}
-.showcase-cat-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.showcase-cat h4{font-size:15px;font-weight:600;margin-bottom:2px}
-.showcase-cat p{font-size:13px;color:var(--muted)}
-.showcase-placeholder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
-.placeholder-card{background:var(--card);border:1px dashed var(--border);border-radius:8px;aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);font-size:13px;transition:border-color 0.2s;cursor:default}
-.placeholder-card:hover{border-color:var(--gold);color:var(--gold)}
-.placeholder-card span{font-size:24px;opacity:0.4}
+.showcase-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.sh-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
+.sh-head{background:var(--ink);padding:22px 26px;display:flex;align-items:center;gap:14px}
+.sh-icon{width:42px;height:42px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sh-head-text h4{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:#faf8f4;margin:0 0 2px}
+.sh-head-text span{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(250,248,244,0.4);letter-spacing:0.08em}
+.sh-body{padding:26px}
+.sh-body p{font-size:14px;color:var(--ink-mid);max-width:100%;margin-bottom:16px}
+.sh-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+.sh-item:last-child{border-bottom:none}
+.sh-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:8px}
+.sh-item-text{font-size:13.5px;color:var(--ink-mid);line-height:1.65}
+.sh-item-text strong{color:var(--ink);font-weight:500}
 
-/* ── CONTACT ── */
-#contact{background:var(--black);border-top:1px solid var(--border)}
-.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.contact-left h2{font-family:'Playfair Display',serif;font-size:clamp(32px,3vw,48px);font-weight:700;line-height:1.1;margin-bottom:20px}
-.contact-left p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:32px}
-.contact-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
-.contact-pill{border:1px solid var(--border);border-radius:4px;padding:8px 16px;font-size:13px;color:var(--muted)}
-.contact-pill strong{color:var(--white);display:block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
-.contact-direct{display:flex;flex-direction:column;gap:10px}
-.contact-direct a{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);text-decoration:none;transition:color 0.2s}
-.contact-direct a:hover{color:var(--gold)}
-.contact-direct a .icon{font-size:18px;width:24px;text-align:center}
-.contact-form{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:36px}
-.contact-form h3{font-size:18px;font-weight:600;margin-bottom:6px}
-.contact-form-sub{font-size:13px;color:var(--muted);margin-bottom:24px}
-.form-row{margin-bottom:16px}
-.form-row label{display:block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);margin-bottom:6px}
-.form-row input,.form-row textarea,.form-row select{width:100%;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:12px 14px;color:var(--white);font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s}
-.form-row input:focus,.form-row textarea:focus,.form-row select:focus{border-color:var(--gold)}
-.form-row textarea{height:100px;resize:vertical}
-.form-row select option{background:var(--card)}
-.form-submit{width:100%;background:var(--gold);color:var(--black);border:none;border-radius:6px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:background 0.2s;margin-top:8px}
-.form-submit:hover{background:var(--goldl)}
-.form-submit:disabled{opacity:0.6;cursor:not-allowed}
-.form-note{font-size:12px;color:var(--muted);margin-top:10px;text-align:center}
-.form-success{display:none;background:rgba(76,168,76,0.1);border:1px solid rgba(76,168,76,0.3);border-radius:8px;padding:20px;text-align:center;margin-top:12px}
-.form-success p{font-size:14px;color:#7EC87E}
+/* ── YEAR TIMELINE ── */
+.timeline{margin-top:48px;border:1px solid rgba(255,255,255,0.06);border-radius:8px;overflow:hidden}
+.tl-row{display:grid;grid-template-columns:140px 1fr;border-bottom:1px solid rgba(255,255,255,0.05)}
+.tl-row:last-child{border-bottom:none}
+.tl-month{padding:22px 24px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-light);border-right:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;background:rgba(255,255,255,0.015)}
+.tl-content{padding:22px 28px}
+.tl-content h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:#faf8f4;margin-bottom:5px}
+.tl-content p{font-size:13.5px;color:rgba(250,248,244,0.58);max-width:100%;margin:0;line-height:1.72}
+
+/* ── REPLICATION ── */
+.rep-box{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:44px 48px;margin-top:40px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.rep-box::before{content:'REPLICATION KIT';position:absolute;top:22px;right:26px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);opacity:0.5}
+.rep-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:32px}
+.rep-step{text-align:center}
+.rep-step-num{font-family:'Playfair Display',serif;font-size:56px;font-weight:400;color:var(--gold-pale);line-height:0.9;margin-bottom:12px}
+.rep-step h5{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.rep-step p{font-size:13px;color:var(--ink-mid);max-width:100%;margin:0;line-height:1.72}
+
+/* ── EXPANSION NOTE ── */
+.exp-note{background:var(--ink);border-radius:10px;padding:40px 44px;margin-top:32px;border-left:4px solid var(--gold-light);position:relative;overflow:hidden}
+.exp-note::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(184,135,44,0.1) 0%,transparent 65%)}
+.exp-note h4{font-family:'Playfair Display',serif;font-size:24px;color:#faf8f4;margin-bottom:14px;position:relative;z-index:1}
+.exp-note p{color:rgba(250,248,244,0.65);font-size:14.5px;max-width:100%;margin-bottom:12px;line-height:1.82;position:relative;z-index:1}
+.exp-note p:last-child{margin-bottom:0}
+.exp-note .fine{color:rgba(250,248,244,0.3);font-size:12.5px;font-style:italic;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em}
 
 /* ── FOOTER ── */
-footer{background:var(--deep);border-top:1px solid var(--border);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
-.footer-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold)}
-.footer-logo span{color:var(--white)}
-.footer-credits{font-size:13px;color:var(--muted);text-align:center}
-.footer-links{display:flex;gap:24px;flex-wrap:wrap}
-.footer-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s}
-.footer-links a:hover{color:var(--gold)}
-
-/* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease}
-.reveal.visible{opacity:1;transform:none}
-
-/* ── WHATSAPP FLOAT ── */
-.wa-float{position:fixed;bottom:28px;right:28px;z-index:999;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);text-decoration:none;transition:all 0.2s}
-.wa-float:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,0.5)}
-.wa-float svg{width:26px;height:26px;fill:white}
+.footer{background:var(--ink);padding:60px 64px;border-top:1px solid rgba(255,255,255,0.04)}
+.footer-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.footer-brand{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:#faf8f4;line-height:1;margin-bottom:8px}
+.footer p{font-size:13px;color:rgba(250,248,244,0.35);max-width:360px;margin:0;line-height:1.7}
+.footer-r{text-align:right}
+.footer-r p{font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;max-width:100%}
 
 /* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .site-nav{padding:0 24px}
-  .site-nav-links{display:none}
-  .site-nav-ham{display:flex}
-  section{padding:60px 24px}
-  .hero{padding:90px 24px 60px}
-  .pitch-grid,.showcase-intro,.contact-inner{grid-template-columns:1fr}
-  .terms-grid{grid-template-columns:1fr 1fr}
-  .film-entry{grid-template-columns:1fr}
-  .term-why-row{grid-template-columns:1fr}
-  .counter-strip{flex-wrap:wrap}
-  .counter-item{flex:50%;border-bottom:1px solid var(--border)}
-  footer{flex-direction:column;text-align:center}
-  .page-nav{padding:0 24px}
-  .divider{margin:0 24px}
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr}.hero-right{display:none}
+  .wrap{padding:0 32px}.nav{padding:0 32px}
+  .section,.section-sm{padding:64px 0}.section-dark{padding:64px 32px}
+  hr.div{margin:0 32px}
+  .problem-grid{grid-template-columns:1fr}
+  .nep-grid{grid-template-columns:1fr}.quote-wall{grid-template-columns:1fr}
+  .sel-grid{grid-template-columns:1fr 1fr}.sf-grid{grid-template-columns:1fr 1fr}
+  .showcase-grid{grid-template-columns:1fr}.rep-steps{grid-template-columns:1fr 1fr}
+  .ruby-block{padding:32px 28px}.rb-grid{grid-template-columns:1fr}
+  .footer{padding:48px 32px}.hero-left{padding:56px 32px 64px}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:20px}
+  .hero-scroll{display:none}
 }
+@media(max-width:600px){
+  .sel-grid{grid-template-columns:1fr}.sf-grid{grid-template-columns:1fr}
+  .rep-steps{grid-template-columns:1fr}.rep-box{padding:28px 24px}
+  h2{font-size:34px}.hero h1{font-size:42px}
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero-left>*{animation:fadeUp 0.9s ease both}
+.hero-left>*:nth-child(1){animation-delay:0.1s}
+.hero-left>*:nth-child(2){animation-delay:0.28s}
+.hero-left>*:nth-child(3){animation-delay:0.44s}
+.hero-left>*:nth-child(4){animation-delay:0.58s}
 </style>
 </head>
 <body>
 
-<!-- SITE NAV -->
-<nav class="site-nav">
-  <a class="site-nav-logo" href="index.html">Frames <span>of Change</span></a>
-  <div class="site-nav-links">
-    <a href="index.html">About the Project</a>
-    <a href="curriculum.html" class="active">Curriculum</a>
-    <a href="#showcase">Student Work</a>
-    <a href="#contact">Contact</a>
-    <a href="index.html" class="nav-pill">← Back to Context</a>
-  </div>
-  <button class="site-nav-ham" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">About the Project</a>
-  <a href="curriculum.html" class="active">Curriculum</a>
-  <a href="#showcase">Student Work</a>
-  <a href="#contact">Contact</a>
-  <a href="index.html" class="nav-pill">← Back to Context</a>
-</div>
-
-<!-- PAGE NAV -->
-<nav class="page-nav">
-  <div class="page-nav-inner">
-    <a href="#home">Home</a>
-    <a href="#pitch">The Pitch</a>
-    <a href="#curriculum">Curriculum</a>
-    <a href="#showcase">Student Work</a>
-    <a href="#contact">Connect</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-film-strip">
-    <div class="hero-film-strip-inner" id="filmstrip"></div>
-  </div>
-  <div class="hero-eyebrow">
-    <div class="eyebrow-line"></div>
-    <span class="eyebrow-text">KMCP Schools · Teach for India · Grades 4–6</span>
-  </div>
-  <h1>Frames<br>of <em>Change</em></h1>
-  <p class="hero-sub">A film studies curriculum that turns Saturday mornings into a year-long conversation about identity, climate, emotion and justice.</p>
-  <div class="hero-meta">
-    <div class="hero-stat"><strong>18</strong><span>Saturdays</span></div>
-    <div class="hero-stat"><strong>54</strong><span>Short Films</span></div>
-    <div class="hero-stat"><strong>4</strong><span>Big Themes</span></div>
-    <div class="hero-stat"><strong>1</strong><span>Student Festival</span></div>
-  </div>
-  <div class="hero-actions">
-    <a class="btn-primary" href="#pitch">Read the Pitch</a>
-    <a class="btn-secondary" href="#curriculum">Explore the Curriculum</a>
-    <a class="btn-secondary" href="index.html">← About the Project</a>
-  </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <span class="scroll-text">Scroll to explore</span>
-  </div>
-</section>
-
-<!-- COUNTER -->
-<div class="counter-strip reveal">
-  <div class="counter-item"><strong>18</strong><span>Weekly Sessions</span></div>
-  <div class="counter-item"><strong>54</strong><span>Films Curated</span></div>
-  <div class="counter-item"><strong>72+</strong><span>Discussion Questions</span></div>
-  <div class="counter-item"><strong>18</strong><span>Student Panels</span></div>
-  <div class="counter-item"><strong>1</strong><span>Year-End Film Festival</span></div>
-</div>
-
-<!-- PITCH -->
-<section id="pitch">
-  <div class="section-label"><div class="line"></div><span>The Pitch</span></div>
-  <h2 class="section-title">Why film?<br>Why <em>now</em>?</h2>
-  <p class="section-sub">A case for bringing short films into classrooms as tools for social and emotional learning.</p>
-  <div class="pitch-grid reveal">
-    <div class="pitch-left">
-      <div class="pitch-quote">"Children don't learn values from lectures. They learn them from stories that make them feel something first."</div>
-      <p class="pitch-body">At KMCP Schools, our students live complex lives. They navigate poverty, caste, climate stress, gender pressure and rapid urbanisation — often without the language to name what they are experiencing. <strong>Frames of Change</strong> gives them that language.</p>
-      <p class="pitch-body">Every Saturday, 2–3 carefully chosen short films — mostly Indian, mostly in Hindi or regional languages — open a window. Not to preach, but to <strong>witness, discuss and question</strong>.</p>
-      <p class="pitch-body">This is not an add-on. It is <strong>core curriculum</strong> — for socio-emotional learning, climate citizenship, and civic identity — delivered through the most powerful medium children already love.</p>
-      <div class="pitch-highlight">
-        <h4>The ask</h4>
-        <p>One Saturday morning each week. A projector. A teacher who listens more than they speak. And students who are trusted to think for themselves.</p>
-      </div>
+<!-- ════ HERO ════ -->
+<section class="hero" id="top">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <div class="hero-eyebrow-text">Subimal · Teach For India · Adarshanagar KMCP · June 2025 – May 2026</div>
     </div>
-    <div class="pitch-right">
-      <div class="pitch-cards">
-        <div class="pitch-card"><div class="pitch-card-icon">🎞️</div><h4>Short films democratise emotion</h4><p>A 7-minute Pixar short does what a 90-minute lecture cannot — it makes students feel before they think, which is the only order that creates lasting change.</p></div>
-        <div class="pitch-card"><div class="pitch-card-icon">🇮🇳</div><h4>Indian stories, Indian contexts</h4><p>80% of films are in Hindi, Bengali, Tamil or Marathi. Students see their own world — kite-flying, village wells, school tiffins — on screen. Representation builds trust.</p></div>
-        <div class="pitch-card"><div class="pitch-card-icon">🗣️</div><h4>Student-led discussion panels</h4><p>Every session ends with a structured panel where students take roles — Questioner, Devil's Advocate, Connector, Summariser. The teacher observes. The students lead.</p></div>
-        <div class="pitch-card"><div class="pitch-card-icon">🎬</div><h4>Students become filmmakers</h4><p>The year ends with students making and screening their own 2–5 minute short films at the Year-End Film Festival. They don't just consume stories — they create them.</p></div>
-        <div class="pitch-card"><div class="pitch-card-icon">🌱</div><h4>Continuity across the year</h4><p>Films from Week 2 are revisited in Week 17. A seedling planted in Week 6 is brought to the festival in Week 18. The curriculum builds memory, not just knowledge.</p></div>
+    <h1>Be The <span>Change</span><br>Project</h1>
+    <p class="hero-desc">A film-based learning and expression programme at Adarshanagar KMCP School, Kasba — using short films, structured debate, and student-led publishing to build confident, critical, civic-minded thinkers from Grade 5 upwards.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-n">1</div>
+        <div class="hero-stat-l">School · Adarshanagar KMCP</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-n">52</div>
+        <div class="hero-stat-l">Saturdays · One Full Year</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-n">10</div>
+        <div class="hero-stat-l">Curated Short Films</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-n">12</div>
+        <div class="hero-stat-l">Citizens' Press Issues</div>
       </div>
     </div>
   </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- CURRICULUM -->
-<section id="curriculum">
-  <div class="section-label"><div class="line"></div><span>The Curriculum</span></div>
-  <h2 class="section-title">18 weeks.<br><em>4 big journeys.</em></h2>
-  <p class="section-sub">Click any term to explore weekly sessions, films, discussion questions, and student panel prompts.</p>
-  <div class="terms-grid reveal" id="termTabs">
-    <div class="term-tile active" data-term="0" onclick="switchTerm(0)">
-      <div class="term-num">Term 1</div>
-      <h3>Who Am I &amp; Where Do I Belong?</h3>
-      <p>Identity, friendship, gender &amp; community</p>
-      <span class="term-months" style="background:rgba(201,168,76,0.15);color:var(--gold)">June – August</span>
-    </div>
-    <div class="term-tile" data-term="1" onclick="switchTerm(1)">
-      <div class="term-num">Term 2</div>
-      <h3>The World Around Us</h3>
-      <p>Climate, water, forests &amp; animals</p>
-      <span class="term-months" style="background:rgba(76,168,76,0.15);color:#7EC87E">Sep – November</span>
-    </div>
-    <div class="term-tile" data-term="2" onclick="switchTerm(2)">
-      <div class="term-num">Term 3</div>
-      <h3>Feelings Are Real</h3>
-      <p>Mental health, grief, anger &amp; kindness</p>
-      <span class="term-months" style="background:rgba(201,100,76,0.15);color:#E8907A">Dec – January</span>
-    </div>
-    <div class="term-tile" data-term="3" onclick="switchTerm(3)">
-      <div class="term-num">Term 4</div>
-      <h3>Justice &amp; the Bigger World</h3>
-      <p>Caste, poverty, gender &amp; peace</p>
-      <span class="term-months" style="background:rgba(168,76,168,0.15);color:#C87EC8">Feb – April</span>
+  <div class="hero-right">
+    <div class="hero-accent"></div>
+    <div class="hero-accent-2"></div>
+    <div class="hero-right-inner">
+      <div class="hero-right-cell">SCREEN</div><div class="hero-right-cell">DEBATE</div><div class="hero-right-cell">CREATE</div>
+      <div class="hero-right-cell">ARGUE</div><div class="hero-right-cell">PUBLISH</div><div class="hero-right-cell">THINK</div>
+      <div class="hero-right-cell">FEEL</div><div class="hero-right-cell">VOICE</div><div class="hero-right-cell">LEAD</div>
+      <div class="hero-right-cell">WATCH</div><div class="hero-right-cell">WRITE</div><div class="hero-right-cell">BUILD</div>
+      <div class="hero-right-cell">LISTEN</div><div class="hero-right-cell">QUESTION</div><div class="hero-right-cell">GROW</div>
     </div>
   </div>
-  <div class="weeks-container reveal" id="weeksContainer"></div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SHOWCASE -->
-<section id="showcase">
-  <div class="section-label"><div class="line"></div><span>Student Showcase</span></div>
-  <h2 class="section-title">Stories made by<br><em>our students</em></h2>
-  <p class="section-sub">A growing archive of student work — films, reflections, artwork, and discussion recordings from every week of the year.</p>
-  <div class="showcase-intro reveal">
-    <div class="showcase-categories">
-      <div class="showcase-cat"><div class="showcase-cat-icon" style="background:rgba(201,168,76,0.15)">🎬</div><div><h4>Student Short Films</h4><p>2–5 min films made by students in Week 18, on themes they chose themselves</p></div></div>
-      <div class="showcase-cat"><div class="showcase-cat-icon" style="background:rgba(76,168,168,0.15)">🎨</div><div><h4>Visual Reflections</h4><p>Fear maps, memory boxes, self-portraits, co-existence drawings &amp; peace murals</p></div></div>
-      <div class="showcase-cat"><div class="showcase-cat-icon" style="background:rgba(76,168,76,0.15)">✉️</div><div><h4>Letters to 2047</h4><p>Each student's letter to their future self about what they did for the planet</p></div></div>
-      <div class="showcase-cat"><div class="showcase-cat-icon" style="background:rgba(168,76,168,0.15)">🎤</div><div><h4>Panel Recordings</h4><p>Audio &amp; notes from student-led discussion panels throughout the year</p></div></div>
-    </div>
-    <div class="showcase-coming">
-      <div class="showcase-coming-icon">🎞️</div>
-      <h3>Coming soon — June 2025</h3>
-      <p>The first batch of student work will be added here when the programme begins. Check back each term for new additions — this page grows with the students.</p>
-    </div>
-  </div>
-  <div class="showcase-placeholder-grid reveal">
-    <div class="placeholder-card"><span>🎬</span>Student film</div>
-    <div class="placeholder-card"><span>🎨</span>Student artwork</div>
-    <div class="placeholder-card"><span>✉️</span>Letter to 2047</div>
-    <div class="placeholder-card"><span>🎤</span>Panel recording</div>
-    <div class="placeholder-card"><span>🌱</span>Seedling journey</div>
-    <div class="placeholder-card"><span>📷</span>Session photos</div>
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner reveal">
-    <div class="contact-left">
-      <h2>Want to bring this to your school?</h2>
-      <p>Frames of Change is designed to be adapted. If you are an educator, a fellow, a school leader, or an organisation working in education — reach out. The curriculum is open and shareable.</p>
-      <div class="contact-pills">
-        <div class="contact-pill"><strong>Programme</strong>Teach for India Fellow</div>
-        <div class="contact-pill"><strong>School</strong>KMCP Schools</div>
-        <div class="contact-pill"><strong>Grade</strong>4, 5 &amp; 6</div>
-        <div class="contact-pill"><strong>City</strong>West Bengal, India</div>
-      </div>
-      <div class="contact-direct">
-        <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Subimal%2C%20I%20came%20across%20Frames%20of%20Change%20and%20wanted%20to%20connect." target="_blank" rel="noopener">
-          <span class="icon">💬</span> Chat on WhatsApp
-        </a>
-        <a href="mailto:your@email.com">
-          <span class="icon">✉️</span> your@email.com
-        </a>
-      </div>
-    </div>
-    <div class="contact-form">
-      <h3>Get in touch</h3>
-      <p class="contact-form-sub">Message goes directly to Subimal's inbox.</p>
-      <!-- FORMSPREE: Replace YOUR_FORM_ID with your actual Formspree form ID from formspree.io -->
-      <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <div class="form-row">
-          <label for="name">Your name</label>
-          <input type="text" id="name" name="name" placeholder="Name" required>
-        </div>
-        <div class="form-row">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="email@school.edu" required>
-        </div>
-        <div class="form-row">
-          <label for="role">I am a…</label>
-          <select id="role" name="role">
-            <option>Teacher / Fellow</option>
-            <option>School leader</option>
-            <option>Education NGO</option>
-            <option>Parent</option>
-            <option>Student</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell us about your school or your interest in this curriculum…" required></textarea>
-        </div>
-        <button type="submit" class="form-submit" id="submitBtn">Send Message</button>
-        <p class="form-note">We respond within 48 hours.</p>
-        <div class="form-success" id="formSuccess">
-          <p>✓ Message sent! We'll be in touch within 48 hours.</p>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">Frames <span>of Change</span></div>
-  <div class="footer-credits">A Teach for India initiative · KMCP Schools · West Bengal<br>Designed for students who deserve to see themselves on screen.</div>
-  <div class="footer-links">
-    <a href="index.html">About</a>
-    <a href="#pitch">Pitch</a>
-    <a href="#curriculum">Curriculum</a>
+<!-- ════ NAV ════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#context">School Context</a>
+    <a href="#problem">Problem Statement</a>
+    <a href="#why-film">Why Film?</a>
+    <a href="#why-short">Why Short Films?</a>
+    <a href="#quotes">Voices on Film</a>
+    <a href="#nep">NEP 2020</a>
+    <a href="#sel">Student Impact</a>
     <a href="#showcase">Showcase</a>
-    <a href="#contact">Contact</a>
+    <a href="#year-plan">Year Plan</a>
+    <a href="#replication">Other Schools</a>
+  </div>
+</nav>
+
+<!-- ════ 01 · CONTEXT ════ -->
+<div id="context">
+<div class="wrap section">
+  <div class="eyebrow">
+    <span class="eyebrow-num">01</span>
+    <span class="eyebrow-rule"></span>
+    <span class="eyebrow-text">School &amp; Community Context</span>
+  </div>
+  <h2>Where We Are,<br><em>Who We Serve</em></h2>
+  <p class="lead">Adarshanagar is a dense, working-class neighbourhood in South-East Kolkata — part of KMC Ward 108, falling under the Kasba Assembly constituency. It sits in the arc of land bounded by the EM Bypass, Ruby Hospital, and the East Kolkata Township — a zone that is simultaneously one of the city's fastest-developing corridors and home to pockets of deep socioeconomic marginality.</p>
+  <p class="body">The children who attend Adarshanagar KMCP School do not live in the gleaming flats going up along the Bypass. They live in the lanes behind them — in cramped homes where multiple families share walls and water, where fathers drive auto-rickshaws or load trucks at the Nonadanga market, where mothers work as domestic help in the housing societies nearby. The economic geography of South-East Kolkata is one of extreme proximity between wealth and precarity, and these students navigate that gap every single day.</p>
+
+  <div class="ruby-block">
+    <div class="ruby-block-label">Adarshanagar · Kasba Constituency · KMC Ward 108 · South-East Kolkata</div>
+    <h3>The Specific World These Students Come From</h3>
+    <p><strong>The shadow of the Bypass.</strong> The Eastern Metropolitan Bypass is the physical backbone of this neighbourhood — a high-speed artery lined with malls, hospitals, IT parks, and housing complexes. Adarshanagar's children see Ruby Hospital from their lanes, pass Acropolis Mall on the way to school, watch the construction cranes that never stop. They live in the engine room of South Kolkata's growth and benefit almost none of it. This proximity to visible development without access is its own particular form of dispossession.</p>
+    <p><strong>East Kolkata Township and the wetlands.</strong> Just beyond Adarshanagar lie the East Kolkata Wetlands — one of the world's largest sewage-fed aquaculture systems, a Ramsar site, and a place increasingly threatened by construction. The local ecology is not abstract to these students. The bheries, the vegetable fields, the flooding that comes not from rivers but from inadequate drainage into a shrinking wetland — this is their environmental reality, specific and urgent.</p>
+    <p><strong>The informal economy and mobility.</strong> This is a neighbourhood of migrants and movement. Families from Odisha, Jharkhand, and rural Bengal settled here across decades of industrial migration. Many students are first-generation urban dwellers whose grandparents came for factory work that no longer exists. The question of where you belong — between the village you're from and the city that barely acknowledges you — is one these children carry.</p>
+    <p><strong>Nonadanga and displacement memory.</strong> The Nonadanga transit camp — a few minutes from this school — housed thousands of evicted families. Several students may have family connections to that experience. Displacement, redevelopment, and the precarity of urban tenure are not historical concepts in Adarshanagar. They are recent, local, and personal.</p>
+    <div class="rb-grid">
+      <div class="rb-item">
+        <div class="rb-item-label">Location</div>
+        <div class="rb-item-val">Near Ruby Hospital, EM Bypass, South-East Kolkata · PIN 700100/700107</div>
+      </div>
+      <div class="rb-item">
+        <div class="rb-item-label">Constituency</div>
+        <div class="rb-item-val">Kasba Assembly Constituency · KMC Ward 108 · Kolkata Dakshin Lok Sabha</div>
+      </div>
+      <div class="rb-item">
+        <div class="rb-item-label">Neighbouring areas</div>
+        <div class="rb-item-val">Nonadanga · East Kolkata Township · Anandapur · Paschim Chowbaga · Rajdanga</div>
+      </div>
+      <div class="rb-item">
+        <div class="rb-item-label">Student profile</div>
+        <div class="rb-item-val">Grade 5 · Ages 9–11 · Working-class families · First and second-generation urban · Bengali-dominant with Odia, Hindi, Bihari linguistic mix</div>
+      </div>
+    </div>
+    <div class="context-tags">
+      <span class="ctx-tag">South-East Kolkata</span>
+      <span class="ctx-tag">EM Bypass corridor</span>
+      <span class="ctx-tag">EKT wetlands</span>
+      <span class="ctx-tag">Informal economy</span>
+      <span class="ctx-tag">KMC Ward 108</span>
+      <span class="ctx-tag">No playground</span>
+      <span class="ctx-tag">First-gen urban</span>
+      <span class="ctx-tag">Kasba constituency</span>
+      <span class="ctx-tag">Migration histories</span>
+    </div>
+  </div>
+
+  <p class="body">This context is not background material. It is the curriculum. Every film chosen, every debate question designed, every art prompt offered in this programme emerges from what these children see when they walk home from school past the Bypass, past the construction sites, past the wetland that is slowly disappearing. BTCP does not bring the world to Adarshanagar. It asks Adarshanagar's children to describe the world they already understand better than most adults who make decisions about it.</p>
+</div>
+</div>
+
+<hr class="div">
+
+<!-- ════ 02 · PROBLEM ════ -->
+<div id="problem" class="section-warm">
+<div class="wrap section">
+  <div class="eyebrow">
+    <span class="eyebrow-num">02</span>
+    <span class="eyebrow-rule"></span>
+    <span class="eyebrow-text">Problem Statement</span>
+  </div>
+  <h2>What We're<br><i>Really</i> Up Against</h2>
+  <p class="lead">The absence of a playground at Adarshanagar KMCP is the visible symptom. The invisible disease is the systematic removal of a child's right to think, feel, argue, and create. BTCP is designed to solve both — using the Saturdays that are already ours.</p>
+
+  <div class="problem-grid">
+    <div class="prob-card">
+      <span class="prob-icon">🏗️</span>
+      <h4>The Infrastructure Crisis</h4>
+      <p>Adarshanagar KMCP has no functional playground, no library, no dedicated art or expression space. Physical space for children to explore, play, and build social bonds simply does not exist within the school. Research is clear: unstructured play and creative exploration are not luxuries — they are the developmental bedrock of confidence, cooperation, and resilience. When that space is absent, children don't just lose recess. They lose the arena for becoming themselves. We reclaim Saturday as that space.</p>
+    </div>
+    <div class="prob-card">
+      <span class="prob-icon">📖</span>
+      <h4>The Pedagogy Crisis</h4>
+      <p>The Grade 5 classroom at KMCP schools operates on one axis: read → memorise → reproduce. The child who thinks visually, who processes through argument, who understands through story — is structurally invisible to this model. They sit in a system designed to sort them by rote performance, not to identify what they are actually capable of. This is not a personal failing of teachers, who are themselves under-resourced. It is a systemic design problem. BTCP introduces a parallel pedagogy that makes different kinds of minds visible.</p>
+    </div>
+    <div class="prob-card">
+      <span class="prob-icon">🗣️</span>
+      <h4>The Voice Crisis</h4>
+      <p>In the five years that these children have spent in school, they have almost certainly never been asked what they think — not about a film, not about their neighbourhood, not about what kind of city they want to live in. Civic identity, critical opinion, aesthetic response, emotional interpretation: these are treated as non-subjects. The result is a generation of children who are perceptive, observant, and rich with things to say about the world — and have never been given the tools or the permission to say them. BTCP changes that every Saturday.</p>
+    </div>
+  </div>
+
+  <div class="pq" style="margin-top:48px;">
+    <p>"These children live at the intersection of Kolkata's extraordinary cultural richness and its sharpest inequalities. They watch the Bypass grow, they see the wetlands shrink, they know what it costs when a family is displaced. They have a relationship with the world. They just haven't been invited to discuss it."</p>
+  </div>
+</div>
+</div>
+
+<!-- ════ 03 · WHY FILM ════ -->
+<div id="why-film">
+<div class="wrap section">
+  <div class="eyebrow">
+    <span class="eyebrow-num">03</span>
+    <span class="eyebrow-rule"></span>
+    <span class="eyebrow-text">Why Audiovisual Learning?</span>
+  </div>
+  <h2>The Pedagogy<br><em>of Film</em></h2>
+  <p class="lead">Film is the world's most democratic art form. A child who cannot decode a paragraph can still interpret a scene. A student who freezes during rote recitation will argue passionately about a character's choice. Cinema bypasses the gatekeeping mechanisms of literacy anxiety and the fear of wrong answers — meeting children in the register of story, image, and emotion, which is the register they already live in.</p>
+  <p class="body">For students at Adarshanagar KMCP, who are immersed in the visual and sonic richness of South-East Kolkata's street life — the Bypass flyovers, the bhery fishermen, the Nonadanga market, the construction noise that never stops — film is not a foreign medium. It is deeply familiar. It is the language of the shared phone screen in a household, the tea-stall television, the serial everyone's mother watches. BTCP takes that familiarity and turns it into a pedagogical act.</p>
+  <p class="body">The film-based learning model at BTCP rests on a trifecta: the <strong>felt experience</strong> of watching a story, the <strong>verbal processing</strong> of structured debate, and the <strong>embodied making</strong> of an art response. These three modes — activated in sequence within a single Saturday session — engage the cognitive, affective, and psychomotor domains simultaneously. This is not enrichment. This is how deep learning actually happens. This is the architecture that produces confident, expressive, thinking students — not one remarkable lesson, but the cumulative effect of fifty-two Saturdays across a school year.</p>
+
+  <div class="sel-grid" style="margin-top:40px;">
+    <div class="sel-card sel-gold">
+      <span class="sel-card-icon">🌐</span>
+      <h4>Universal Access to Meaning</h4>
+      <p>No text-decoding required to access a film's emotional and thematic content. Every child — regardless of reading level, language background, or academic confidence — can watch, feel, and interpret. Cinema democratises the act of thinking.</p>
+    </div>
+    <div class="sel-card sel-teal">
+      <span class="sel-card-icon">🔍</span>
+      <h4>Productive Ambiguity</h4>
+      <p>Great films don't explain themselves. They invite multiple readings, competing interpretations, and productive disagreement. This ambiguity is not a design flaw — it is the raw material of critical thinking. There is no single correct answer to "What was this film really about?"</p>
+    </div>
+    <div class="sel-card sel-blue">
+      <span class="sel-card-icon">🎨</span>
+      <h4>The Three-Mode Learning Arc</h4>
+      <p>Screen (felt experience) → Debate (verbal processing) → Art (embodied making). Three modes in one session, engaging cognitive, affective, and psychomotor domains simultaneously. The SEL competencies this builds cannot be replicated by any textbook model.</p>
+    </div>
+    <div class="sel-card sel-ruby">
+      <span class="sel-card-icon">🏙️</span>
+      <h4>Cultural Resonance</h4>
+      <p>Films about urban flooding, family stress, children navigating institutions alone, and communities fighting for basics land differently for children who live these realities. The curriculum is chosen because it resonates in Adarshanagar specifically, not generically.</p>
+    </div>
+    <div class="sel-card sel-gold">
+      <span class="sel-card-icon">✍️</span>
+      <h4>Authorship as Transformation</h4>
+      <p>When a child publishes an opinion about a film they watched, they stop writing for a teacher and start writing for a world that might answer back. Authorship changes a child's relationship with language — permanently, not just for a school year.</p>
+    </div>
+    <div class="sel-card sel-teal">
+      <span class="sel-card-icon">🏛️</span>
+      <h4>Practising Civic Life</h4>
+      <p>Children who debate publicly, chair discussions, edit a magazine, and curate an exhibition are not studying about democracy — they are practising it. BTCP doesn't produce students who know about civic participation. It produces students who have already done it.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="div">
+
+<!-- ════ 04 · WHY SHORT FILMS ════ -->
+<div id="why-short" class="section-warm">
+<div class="wrap section">
+  <div class="eyebrow">
+    <span class="eyebrow-num">04</span>
+    <span class="eyebrow-rule"></span>
+    <span class="eyebrow-text">Why Short Films Specifically?</span>
+  </div>
+  <h2>The Case<br><em>for the Short</em></h2>
+  <p class="lead">This programme uses short films — not feature films, not hour-long documentaries, not YouTube clips. The choice of the short film as the primary teaching medium is deliberate, research-informed, and specific to the context of Grade 5 learners in under-resourced KMCP classrooms.</p>
+  <p class="body">Short films are one of the most pedagogically concentrated art forms in existence. In 4 to 15 minutes, a well-crafted short film delivers narrative tension, character development, thematic complexity, emotional stakes, and often — crucially — unresolved ambiguity. For an educator working with limited time, limited infrastructure, and students whose attention and trust are earned not assumed, the short film is the ideal vehicle.</p>
+
+  <div class="sf-grid">
+    <div class="sf-card">
+      <div class="sf-top"><div class="sf-num">01</div><div class="sf-tag">Cognitive</div></div>
+      <h4>Fits the Developmental Attention Window</h4>
+      <p>Children aged 9–11 have a natural sustained focus window of roughly 10–20 minutes for narrative content. Short films (4–15 min) sit precisely inside this window — full engagement, no fatigue, complete story arc. A 90-minute feature demands infrastructure, time, and sustained attention that a Saturday session and a KMCP classroom cannot guarantee.</p>
+    </div>
+    <div class="sf-card">
+      <div class="sf-top"><div class="sf-num">02</div><div class="sf-tag">Thematic</div></div>
+      <h4>Maximum Density, Minimum Runtime</h4>
+      <p>The best short films carry more thematic complexity per minute than almost any other narrative form. A 6-minute animation about a fish navigating a flooded city can sustain a 45-minute structured debate about climate, gender, resilience, and urban life. Short films are pedagogically concentrated by design — they do not dilute their ideas across 90 minutes.</p>
+    </div>
+    <div class="sf-card">
+      <div class="sf-top"><div class="sf-num">03</div><div class="sf-tag">Logistical</div></div>
+      <h4>Low Infrastructure, High Impact</h4>
+      <p>Short films require one device — a laptop, tablet, or large-screen phone — and can be downloaded in advance for schools without reliable internet. No projector, no darkened room, no AV setup. Total download size for a curated set of 10 short films: under 500MB. This is a curriculum that works in the real conditions of a KMCP school, not an imagined ideal one.</p>
+    </div>
+    <div class="sf-card">
+      <div class="sf-top"><div class="sf-num">04</div><div class="sf-tag">Pedagogical</div></div>
+      <h4>Ambiguity Without Closure</h4>
+      <p>Unlike feature films that typically deliver narrative resolution, great short films often end open — questioning, unresolved, deliberately incomplete. This is a pedagogical asset. When a film doesn't tell students what to think, they are required to decide. That act of deciding — forming an opinion, testing it against a classmate's, defending or revising it — is the critical thinking moment BTCP is designed to create over and over again.</p>
+    </div>
+    <div class="sf-card">
+      <div class="sf-top"><div class="sf-num">05</div><div class="sf-tag">Structural</div></div>
+      <h4>One Session = One Complete Arc</h4>
+      <p>Each Saturday is self-contained. One short film generates one theme, one debate, one artwork, one published piece. Students who miss a session re-enter without having missed a chapter. The curriculum is modular — adaptable, not fragile. A rain-cancelled Saturday doesn't break the year. A film that doesn't land can be replaced. The structure holds regardless.</p>
+    </div>
+    <div class="sf-card">
+      <div class="sf-top"><div class="sf-num">06</div><div class="sf-tag">Aspirational</div></div>
+      <h4>A Form Students Can One Day Make</h4>
+      <p>Short films are not products of wealthy studios and massive crews. They are made by students, by independent filmmakers, by communities with smartphones and stories. Introducing this form to Grade 5 students is also introducing them to an aspiration: by Year 2 of BTCP, students will make their own short film. Watching becomes the preparation for making.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════ 05 · QUOTES ════ -->
+<div id="quotes" class="section-dark dark">
+<div style="max-width:1080px;margin:0 auto;">
+  <div class="eyebrow eyebrow-dark">
+    <span class="eyebrow-num">05</span>
+    <span class="eyebrow-rule"></span>
+    <span class="eyebrow-text">Voices on Learning Through Film</span>
+  </div>
+  <h2>What the World<br><em>Already Knows</em></h2>
+  <p class="lead" style="margin-bottom:48px;">BTCP is not an experiment in the dark. Educators, filmmakers, psychologists, and neuroscientists have for decades made the case for visual storytelling as a primary learning medium. These are some of the voices that ground this programme's pedagogy.</p>
+
+  <div class="quote-wall">
+    <div class="qw-card featured">
+      <div class="qw-quote">"Cinema is a mirror by which we often see ourselves. If film is art, and art is a reflection of life — then teaching through film is teaching children to look honestly at the world and, more importantly, at themselves."</div>
+      <div class="qw-attr">
+        <div class="qw-line"></div>
+        <div>
+          <div class="qw-name">Satyajit Ray</div>
+          <div class="qw-role">Filmmaker · Kolkata · on film's role in shaping perception and social consciousness</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-card">
+      <div class="qw-quote">"Film literacy teaches students not just how to watch, but how to think — how to question the frames we are given, how to argue for a different picture of the world."</div>
+      <div class="qw-attr">
+        <div class="qw-line"></div>
+        <div>
+          <div class="qw-name">Paulo Freire</div>
+          <div class="qw-role">Pedagogy of the Oppressed · on critical media literacy as liberation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-card">
+      <div class="qw-quote">"Emotional learning through story is not a soft add-on to rigorous education. It is its foundation. Children who can name what they feel, and understand why characters make the choices they do, become adults who can navigate complexity."</div>
+      <div class="qw-attr">
+        <div class="qw-line"></div>
+        <div>
+          <div class="qw-name">Daniel Goleman</div>
+          <div class="qw-role">Emotional Intelligence · on SEL as the bedrock of lifelong capability</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-card">
+      <div class="qw-quote">"When children see a story told visually, they engage areas of the brain associated with empathy, memory, and meaning-making simultaneously. This is not passive absorption. It is active, embodied cognition."</div>
+      <div class="qw-attr">
+        <div class="qw-line"></div>
+        <div>
+          <div class="qw-name">Uri Hasson</div>
+          <div class="qw-role">Princeton Neuroscience Institute · on neural coupling in narrative comprehension</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-card">
+      <div class="qw-quote">"The child who has learned to watch a film with attention — to notice what a filmmaker chooses to show and what they choose to hide — has learned something that no worksheet can teach. They have learned how power constructs reality."</div>
+      <div class="qw-attr">
+        <div class="qw-line"></div>
+        <div>
+          <div class="qw-name">bell hooks</div>
+          <div class="qw-role">The Oppositional Gaze · on critical visual literacy as political education</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-card">
+      <div class="qw-quote">"Art-integrated education is not about making school more fun. It is about making it more honest. The arts give children a language for what cannot be said in multiple-choice questions — complexity, ambiguity, feeling, conviction."</div>
+      <div class="qw-attr">
+        <div class="qw-line"></div>
+        <div>
+          <div class="qw-name">NEP 2020</div>
+          <div class="qw-role">Para 4.7 · National Education Policy of India · Ministry of Education</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-card">
+      <div class="qw-quote">"Films can make us experience time differently, feel what others feel, imagine what we have never seen. For a child in a classroom with no playground, no library, no windows — a film can be the largest room they have ever been in."</div>
+      <div class="qw-attr">
+        <div class="qw-line"></div>
+        <div>
+          <div class="qw-name">Roger Ebert</div>
+          <div class="qw-role">Film Critic · Chicago Sun-Times · on cinema as empathy machine</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-card">
+      <div class="qw-quote">"Debate after a shared viewing experience develops a specific and rare skill: the ability to hold your own reading of something while remaining genuinely open to a different one. This is the cognitive basis of democratic citizenship."</div>
+      <div class="qw-attr">
+        <div class="qw-line"></div>
+        <div>
+          <div class="qw-name">Martha Nussbaum</div>
+          <div class="qw-role">Not For Profit · on the humanities and arts as training for democratic life</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pq" style="margin-top:56px;">
+    <p>"We reclaim the Saturday not because we have no choice. We reclaim it because we know something the timetable doesn't: that a child who has argued about a film, painted their response, and published their opinion has done more real learning in two hours than in five days of rote."</p>
+    <cite>Subimal · Be The Change Project · Adarshanagar KMCP · 2025</cite>
+  </div>
+</div>
+</div>
+
+<!-- ════ 06 · NEP ════ -->
+<div id="nep">
+<div class="wrap section">
+  <div class="eyebrow">
+    <span class="eyebrow-num">06</span>
+    <span class="eyebrow-rule"></span>
+    <span class="eyebrow-text">NEP 2020 Alignment</span>
+  </div>
+  <h2>Grounded in<br><em>National Policy</em></h2>
+  <p class="lead">BTCP is not an extracurricular enrichment programme. It is a direct, documented implementation of the National Education Policy 2020's most urgent pedagogical mandates. Every Saturday session maps to specific NEP provisions — making this programme defensible to school leadership, KMCP officials, and Teach For India stakeholders as a legitimate educational intervention, not a hobby.</p>
+  <p class="body">NEP 2020 represents the most significant redesign of Indian education pedagogy since 1986. Its core ambition — to shift learning from rote memorisation toward competency, experiential engagement, and holistic development — is precisely what BTCP operationalises in a single-device, single-room, zero-infrastructure Saturday session. Where NEP sets the vision, BTCP demonstrates what it looks like in a KMC school in Kasba.</p>
+
+  <div class="nep-grid" style="margin-top:40px;">
+    <div class="nep-card">
+      <div class="nep-ref">NEP 2020 · Para 4.6</div>
+      <h4>Experiential Learning as Standard Pedagogy</h4>
+      <p>NEP mandates that "in all stages, experiential learning will be adopted — including hands-on learning, arts-integrated education, and storytelling-based pedagogy — as standard pedagogy within each subject." BTCP's film-debate-art sequence is a direct, replicable, low-infrastructure delivery mechanism for this mandate at the primary level.</p>
+    </div>
+    <div class="nep-card">
+      <div class="nep-ref">NEP 2020 · Para 4.7</div>
+      <h4>Art-Integration as Cross-Curricular Pedagogy</h4>
+      <p>NEP defines art-integration as "a cross-curricular pedagogical approach utilising aspects of art and culture as the basis for learning of concepts across subjects... embedded in classroom transactions for creating joyful classrooms and imbibing Indian ethos." BTCP's art response session is precisely this — art as a primary vehicle for processing and expressing learning, not a decorative addition.</p>
+    </div>
+    <div class="nep-card">
+      <div class="nep-ref">NEP 2020 · Para 4.23</div>
+      <h4>21st-Century Competencies for Every Student</h4>
+      <p>NEP explicitly mandates development of "scientific temper and evidence-based thinking; creativity and innovativeness; sense of aesthetics and art; oral and written communication; critical thinking and problem solving." BTCP's SWBAT framework maps each of these competencies to specific, observable session outcomes across the full film curriculum.</p>
+    </div>
+    <div class="nep-card">
+      <div class="nep-ref">NEP 2020 · Digital Education Chapter</div>
+      <h4>Media as a Bridge for the Digital Divide</h4>
+      <p>NEP calls for "mass media extensively used for educational purposes to address the digital divide" and "a digital repository of educational content including learning media." BTCP uses short films — minimal-device, pre-downloadable, freely accessible — as the practical, grounded response to this mandate in real KMCP classroom conditions, not aspirational lab conditions.</p>
+    </div>
+    <div class="nep-card">
+      <div class="nep-ref">NEP 2020 · Holistic Development Framework</div>
+      <h4>Social-Emotional Learning (SEL)</h4>
+      <p>NEP recognises that holistic development must address cognitive, psychomotor, and affective domains simultaneously. BTCP's SEL framework — critical thinking, emotional literacy, civic awareness, creative voice, confident expression — maps directly to NEP's vision of the whole child. This is not the examination-performing student. It is the fully-formed human being that education is supposed to produce.</p>
+    </div>
+    <div class="nep-card">
+      <div class="nep-ref">NEP 2020 · Assessment Reform</div>
+      <h4>Competency-Based, Not Rote Assessment</h4>
+      <p>NEP mandates assessment "aligned with learning outcomes, capabilities, and dispositions." The Citizens' Press — a monthly student-written, student-edited magazine — is exactly this: a living competency portfolio. It demonstrates real-world communication, critical argument, aesthetic judgment, and creative expression. It is observable, shareable, and community-facing evidence of learning that no mark sheet can replicate.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="div">
+
+<!-- ════ 07 · SEL ════ -->
+<div id="sel" class="section-warm">
+<div class="wrap section">
+  <div class="eyebrow">
+    <span class="eyebrow-num">07</span>
+    <span class="eyebrow-rule"></span>
+    <span class="eyebrow-text">How This Changes Students</span>
+  </div>
+  <h2>From Passive<br><i>to Published</i></h2>
+  <p class="lead">BTCP is not enrichment. It is transformation. Each Saturday session builds a specific, observable capability — measured not by examination scores, but by what students do with the world around them. The outcomes below are not aspirational. They are structurally produced by the methodology.</p>
+
+  <div class="sel-grid">
+    <div class="sel-card sel-gold">
+      <span class="sel-card-icon">🎤</span>
+      <h4>Spoken Confidence</h4>
+      <p>Standing in a classroom circle and saying "I disagree, and here is why" is one of the most terrifying and transformative acts a 10-year-old can perform. BTCP gives every student not just permission but a structured, repeated opportunity to do this every week. Confidence is not a personality trait. It is a practiced skill. We give it 52 weeks of practice.</p>
+    </div>
+    <div class="sel-card sel-teal">
+      <span class="sel-card-icon">🔬</span>
+      <h4>Critical Thinking</h4>
+      <p>Films are chosen precisely because they resist single interpretation. Students learn to hold multiple readings simultaneously, to cite specific evidence from what they watched, and to revise their position when a classmate makes a stronger argument. This is not a discussion skill. It is the cognitive architecture of a functioning civic mind.</p>
+    </div>
+    <div class="sel-card sel-ruby">
+      <span class="sel-card-icon">💛</span>
+      <h4>Emotional Literacy</h4>
+      <p>The art session after each film asks students to respond to what they felt — not what they learned. For children who carry significant stress — economic precarity, family instability, the ambient anxiety of urban marginality — the ability to name, externalise, and process emotion through creative work is not just developmental. It is protective. SEL research consistently identifies emotional vocabulary as one of the strongest predictors of long-term wellbeing.</p>
+    </div>
+    <div class="sel-card sel-blue">
+      <span class="sel-card-icon">🏛️</span>
+      <h4>Civic Identity</h4>
+      <p>BTCP students do not study about the world. They form opinions about it. When a Grade 5 student from Adarshanagar writes a published essay about why the East Kolkata Wetlands should be protected — citing evidence from a film they watched and a debate they led — they have taken a step toward civic agency that no textbook lesson has ever produced in this classroom.</p>
+    </div>
+    <div class="sel-card sel-gold">
+      <span class="sel-card-icon">✏️</span>
+      <h4>Authorship</h4>
+      <p>The Citizens' Press is a real publication — written by students, edited by students, read by families, displayed in school. When a student's name appears above something they wrote for a real audience, their relationship with language changes permanently. They stop writing for a teacher. They start writing for a world that might answer back.</p>
+    </div>
+    <div class="sel-card sel-teal">
+      <span class="sel-card-icon">👥</span>
+      <h4>Roles, Responsibility &amp; Leadership</h4>
+      <p>Debate Lead, Magazine Team, Art Team — these are not decorative titles. They are real roles with real outputs that the rest of the class depends on. A student who has chaired a class debate, curated an art exhibition, and copy-edited a magazine by age 11 has practiced the professional and collaborative skills that most adults are still acquiring in their twenties.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════ 08 · SHOWCASE ════ -->
+<div id="showcase">
+<div class="wrap section">
+  <div class="eyebrow">
+    <span class="eyebrow-num">08</span>
+    <span class="eyebrow-rule"></span>
+    <span class="eyebrow-text">Student Showcase &amp; Learning Events</span>
+  </div>
+  <h2>Making Learning<br><em>Visible</em></h2>
+  <p class="lead">The most powerful evidence of learning is what students do in public. BTCP's showcase model creates multiple high-quality moments across the school year where student thinking, art, and voice are witnessed by an audience beyond the classroom — parents, community members, school staff, and the students themselves.</p>
+  <p class="body">Visibility is not performance for its own sake. It is what makes learning feel real and consequential. When a child knows that their debate summary will be read by their mother, their artwork displayed in the school corridor, their opinion published in a magazine that exists outside this classroom — the quality of their engagement with every session changes. They are no longer practising for an exam. They are doing something that matters.</p>
+
+  <div class="showcase-grid">
+    <div class="sh-card">
+      <div class="sh-head">
+        <div class="sh-icon">📰</div>
+        <div class="sh-head-text"><h4>The Citizens' Press</h4><span>Monthly · All Year</span></div>
+      </div>
+      <div class="sh-body">
+        <p>A student-written, student-edited monthly magazine — printed and circulated within Adarshanagar KMCP school. Real journalism. Real readership. Starting from Session One.</p>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Debate summaries</strong> — written by Debate Leads after each session, capturing the argument, counter-argument, and class conclusion.</div></div>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Student film reviews</strong> — their own language, their own verdicts. No adult edits out the strong opinions.</div></div>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Artwork pages</strong> — curated by the Art Team, with each piece captioned by the student who created it.</div></div>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Shared with parents and staff</strong> each month — a public, tangible record of what learning looks like in this classroom.</div></div>
+      </div>
+    </div>
+
+    <div class="sh-card">
+      <div class="sh-head">
+        <div class="sh-icon">🖼️</div>
+        <div class="sh-head-text"><h4>End-of-Year Art Exhibition</h4><span>May 2026 · School &amp; Community</span></div>
+      </div>
+      <div class="sh-body">
+        <p>A school-based exhibition of the full year's student artwork — curated by student Art Teams, displayed in the school hall or a community space, and open to families and the Adarshanagar community.</p>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Student-curated selection</strong> — Art Teams choose which pieces go to exhibition, write the wall labels, and design the installation layout.</div></div>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Opening event</strong> with parents, school staff, and TFI representatives — one year of creative thinking made visible in a single room.</div></div>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Student artists present</strong> to explain their work in their own words — the year's final, most public act of voice.</div></div>
+      </div>
+    </div>
+
+    <div class="sh-card">
+      <div class="sh-head">
+        <div class="sh-icon">🏆</div>
+        <div class="sh-head-text"><h4>Year-End Celebration &amp; Recognition</h4><span>May 2026 · In-School</span></div>
+      </div>
+      <div class="sh-body">
+        <p>Student roles and contributions are formally recognised — not as prizes for performance, but as acknowledgements of a year of real work, real responsibility, and real output.</p>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Debate Lead certificates</strong> — every student who opened and chaired a session debate receives a formal acknowledgement.</div></div>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Bound Citizens' Press</strong> — each student receives a printed, bound copy of the full year's magazine to keep.</div></div>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Best-of-Year reading</strong> — the strongest student writing from across all twelve issues, read aloud by students to an audience.</div></div>
+      </div>
+    </div>
+
+    <div class="sh-card">
+      <div class="sh-head">
+        <div class="sh-icon">🎬</div>
+        <div class="sh-head-text"><h4>Student-Made Film</h4><span>April–May 2026 · Stretch Goal</span></div>
+      </div>
+      <div class="sh-body">
+        <p>If the cohort is ready, the final sessions invite students to make a short film of their own — 1 to 3 minutes, shot on a smartphone, about a theme from Adarshanagar itself.</p>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Student-written and student-directed</strong> — Subimal facilitates but does not direct. The story and the choices belong to the class.</div></div>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Screened at the Art Exhibition</strong> — the class film plays as part of the May showcase event.</div></div>
+        <div class="sh-item"><div class="sh-dot"></div><div class="sh-item-text"><strong>Foundation for Year 2</strong> — if the programme continues, student filmmaking becomes a formal curriculum component.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════ 09 · YEAR PLAN ════ -->
+<div id="year-plan" class="section-dark dark">
+<div style="max-width:1080px;margin:0 auto;">
+  <div class="eyebrow eyebrow-dark">
+    <span class="eyebrow-num">09</span>
+    <span class="eyebrow-rule"></span>
+    <span class="eyebrow-text">One-Year Plan · June 2025 – May 2026</span>
+  </div>
+  <h2>A Year at<br><em>Adarshanagar</em></h2>
+  <p class="lead">This is a one-year plan, run entirely by Subimal, every Saturday at Adarshanagar KMCP School. Ten films, twelve Citizens' Press issues, one art exhibition, and fifty-two sessions across which a class of Grade 5 students become thinkers, debaters, and published writers — in one year, in one school, with one laptop and a lot of Saturdays.</p>
+
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-month">Jun 2025</div>
+      <div class="tl-content"><h4>Launch &amp; Community Building</h4><p>Programme launch. First session: introduce BTCP, assign student roles — Debate Lead, Art Team, Magazine Team — and launch the Citizens' Press concept. First film: chosen to open a conversation about the class itself as a community and what makes a group work or break apart.</p></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-month">Jul–Aug 2025</div>
+      <div class="tl-content"><h4>Climate, Place &amp; Environment Theme</h4><p>Films screened during monsoon season, when flooding, drainage failure, and the East Kolkata wetlands are at maximum immediate relevance. First two issues of Citizens' Press published. Students write about environmental conditions they can observe from the school itself.</p></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-month">Sep–Oct 2025</div>
+      <div class="tl-content"><h4>Identity, Family &amp; Emotional Life Theme</h4><p>Films exploring family stress, parent relationships, grief, and self-image. Art Team produces the year's most personal work. One session is handled with additional facilitation care, with a private journaling option offered in place of publication for sensitive responses.</p></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-month">Nov–Dec 2025</div>
+      <div class="tl-content"><h4>School, Joy, Belonging &amp; Empathy Theme</h4><p>Films that ask what school is and what it could be — and how we treat people who are different from us. Citizens' Press mid-year special edition: students write their own vision of a school that actually sees them. Families receive this issue at a small informal showing.</p></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-month">Jan–Feb 2026</div>
+      <div class="tl-content"><h4>Dreams, Courage &amp; Possibility Theme</h4><p>Films about ambition, fear, the gap between where you are and where you want to go. Students write the most important piece of the year: "My dream. My plan." This is the piece that goes home. This is the piece parents read. This is the piece that changes what a family believes is possible.</p></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-month">Mar–Apr 2026</div>
+      <div class="tl-content"><h4>Stories, Memory &amp; Possible Futures Theme</h4><p>The power of stories to heal, to preserve memory, and to imagine alternatives. Final Citizens' Press issue in preparation. Students optionally begin writing or storyboarding their own short film about Adarshanagar — their street, their market, their wetland, their bypass.</p></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-month">May 2026</div>
+      <div class="tl-content"><h4>Showcase, Exhibition &amp; Celebration</h4><p>End-of-year Art Exhibition at Adarshanagar KMCP. Bound Citizens' Press distributed to every student. Student film (if completed) screened. All students formally recognised for their year. Year-end documentation — including session notes, student outputs, and a programme reflection — submitted to Teach For India.</p></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════ 10 · REPLICATION ════ -->
+<div id="replication">
+<div class="wrap section">
+  <div class="eyebrow">
+    <span class="eyebrow-num">10</span>
+    <span class="eyebrow-rule"></span>
+    <span class="eyebrow-text">Other Fellows · Other Schools</span>
+  </div>
+  <h2>A Curriculum<br><em>That Travels</em></h2>
+  <p class="lead">This programme is designed and run by Subimal at Adarshanagar KMCP for Year One. But the curriculum architecture — from film title to YouTube link, from debate question to SWBAT, from art prompt to publication template — is fully documented, shareable, and designed to be picked up by any TFI fellow or KMCP teacher with minimal preparation.</p>
+  <p class="body">KMCP schools across Kolkata share a remarkably similar context: dense working-class neighbourhoods, absent playgrounds, overcrowded classrooms, rote-heavy pedagogy, and Grade 5 students who are deeply observant, chronically underestimated, and hungry to be heard. The specific geography changes — Sinthi, Tiljala, Garden Reach, Cossipore — but the structural conditions and the student reality are recognisably the same. What works in Adarshanagar is designed to work across that common context, with local adaptation.</p>
+
+  <div class="rep-box">
+    <h3>How the Curriculum Works for Any Fellow or Teacher</h3>
+    <p class="body" style="margin-top:12px;">The BTCP Film Curriculum is a plug-and-run structure. It removes the barrier of "I don't know how to do this." A fellow who has never taught through film can run a strong session on Day One because the structure does the heavy lifting. The facilitator brings presence, warmth, and their specific knowledge of their students. The curriculum provides everything else.</p>
+    <div class="rep-steps">
+      <div class="rep-step">
+        <div class="rep-step-num">1</div>
+        <h5>Open the Session Plan</h5>
+        <p>Each film has a one-page plan: title, link, runtime, themes, SWBAT outcomes, three debate questions graded by difficulty, one art prompt, and one publication prompt. No additional prep needed to run a session.</p>
+      </div>
+      <div class="rep-step">
+        <div class="rep-step-num">2</div>
+        <h5>Download the Film</h5>
+        <p>Every film is freely available on YouTube. Each can be downloaded in advance for schools without reliable internet. Total storage for all 10 films: under 500MB — fits on any phone or laptop.</p>
+      </div>
+      <div class="rep-step">
+        <div class="rep-step-num">3</div>
+        <h5>Run the 5-Step Structure</h5>
+        <p>Screen → Circle → Debate → Art → Publish. Each step has facilitator notes, timing guidance, and a fallback prompt for when students go quiet. Flexible by design, not rigid by default.</p>
+      </div>
+      <div class="rep-step">
+        <div class="rep-step-num">4</div>
+        <h5>Localise and Modify</h5>
+        <p>Debate questions and art prompts can be adapted to any neighbourhood. The films are fixed; everything else is open. A fellow in Cossipore or Tiljala changes the "Kolkata connection" to their street. The structure holds.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-note">
+    <h4>The Possibility of Expansion</h4>
+    <p>Adarshanagar KMCP is where BTCP begins. But it does not need to be where it ends. The curriculum, session structure, facilitator guide, film library, and Citizens' Press template developed in Year One represent a replicable system — not a bespoke experiment designed for one room. It is built to travel.</p>
+    <p>If the programme is sustained beyond May 2026, the BTCP curriculum could be offered as a shared resource to all TFI fellows placed in KMCP schools across Kolkata. Each fellow runs it independently at their school, adapting for local context while drawing on the same film library, SWBAT framework, and publication model. There is no central coordination required. There is no budget beyond a phone and internet access. There is only the structure, the films, and the Saturday.</p>
+    <p>Over time, this creates something larger: not just one school where children's voices are published and taken seriously — but a quiet network of KMCP classrooms where, every Saturday, Grade 5 students watch, argue, create, and send their ideas into a world that is slowly beginning to listen.</p>
+    <p class="fine">Expansion is not the goal of Year One. The goal of Year One is to prove it works — at Adarshanagar, with this cohort, in this city. That proof is the only argument that matters for what comes next.</p>
+  </div>
+</div>
+</div>
+
+<!-- ════ FOOTER ════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Be The Change Project</div>
+      <p>Subimal · Teach For India · Adarshanagar KMCP School · Kasba Constituency<br>Film Studies Curriculum · Grade 5 · June 2025 – May 2026</p>
+    </div>
+    <div class="footer-r">
+      <p style="color:rgba(250,248,244,0.5);margin-bottom:6px;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:0;font-weight:300;">Grounded in NEP 2020 · Art-Integrated Learning · SEL</p>
+      <p>NEP 2020 · Para 4.6 · Para 4.7 · Para 4.23</p>
+      <p style="margin-top:4px;">The Citizens' Press · Published by students of Class V</p>
+    </div>
   </div>
 </footer>
 
-<!-- WHATSAPP BUTTON -->
-<a class="wa-float" href="https://wa.me/91XXXXXXXXXX?text=Hi%20Subimal%2C%20I%20came%20across%20Frames%20of%20Change%20and%20wanted%20to%20connect." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-
-<script>
-// ─── NAV ───
-function toggleMenu(){
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-
-// Page nav active on scroll
-const pageLinks = document.querySelectorAll('.page-nav a');
-const pageSections = ['home','pitch','curriculum','showcase','contact'];
-window.addEventListener('scroll',()=>{
-  let cur='';
-  pageSections.forEach(id=>{
-    const el=document.getElementById(id);
-    if(el&&window.scrollY>=el.offsetTop-120) cur=id;
-  });
-  pageLinks.forEach(a=>{
-    const h=a.getAttribute('href').replace('#','');
-    a.classList.toggle('active',h===cur);
-  });
-},{passive:true});
-
-// ─── FILMSTRIP ───
-function buildFilmStrip(){
-  const fs=document.getElementById('filmstrip');
-  if(!fs) return;
-  let h='';
-  for(let i=0;i<20;i++) h+=`<div class="film-hole-row"><div class="film-hole"></div><div class="film-hole"></div></div><div class="film-frame"></div>`;
-  fs.innerHTML=h+h;
-}
-
-// ─── SCROLL REVEAL ───
-function initReveal(){
-  const els=document.querySelectorAll('.reveal');
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('visible')});
-  },{threshold:0.1});
-  els.forEach(el=>obs.observe(el));
-}
-
-// ─── FORMSPREE SUBMIT ───
-document.getElementById('contactForm').addEventListener('submit', async function(e){
-  e.preventDefault();
-  const btn=document.getElementById('submitBtn');
-  btn.textContent='Sending…';
-  btn.disabled=true;
-  try{
-    const res=await fetch(this.action,{
-      method:'POST',
-      body:new FormData(this),
-      headers:{'Accept':'application/json'}
-    });
-    if(res.ok){
-      this.reset();
-      document.getElementById('formSuccess').style.display='block';
-      btn.textContent='Sent ✓';
-      btn.style.background='#4CA84C';
-    } else {
-      btn.textContent='Error — try again';
-      btn.disabled=false;
-      btn.style.background='#C94C4C';
-      setTimeout(()=>{btn.textContent='Send Message';btn.style.background='';btn.disabled=false;},3000);
-    }
-  } catch(err){
-    btn.textContent='Error — try again';
-    btn.disabled=false;
-    setTimeout(()=>{btn.textContent='Send Message';btn.disabled=false;},3000);
-  }
-});
-
-// ─── CURRICULUM DATA ───
-const terms=[
-  {title:"Who Am I & Where Do I Belong?",sub:"Identity, friendship, gender & community",months:"June – August",why:"Children at 9–12 are forming their social identity. Starting the year with belonging creates safety for harder conversations ahead.",what:"Who they are beyond their school label; that difference is normal; how to speak about family, friendship and gender without shame.",how:"Reduces social anxiety, builds empathy across differences, and gives children language for complex feelings about identity.",weeks:[
-    {num:"Week 1",theme:"Self, family & what makes me, me",films:[
-      {title:"Wade",badge:"Short",lang:"Hindi",meta:"India · ~15 min",link:"https://www.youtube.com/results?search_query=Wade+Indian+short+film",addresses:"A child's silent inner world, emotional suppression, family dynamics",learns:"Children often carry more than they show — practising empathy for quiet peers."},
-      {title:"One",badge:"Short",lang:"Hindi",meta:"India · ~10 min",link:"https://www.youtube.com/results?search_query=One+Indian+short+film+hindi",addresses:"Solitude, uniqueness, finding one's own path",learns:"Being 'one of a kind' is a strength, not a flaw — building self-acceptance."},
-      {title:"Idar Udhar",badge:"Short",lang:"Hindi",meta:"India · ~12 min",link:"https://www.youtube.com/results?search_query=Idar+Udhar+Hindi+short+film",addresses:"Sibling bonds, urban migration and family roles",learns:"The emotional weight of separation and how families adapt."}
-    ],questions:["In Wade, why do you think the child doesn't speak about how they feel? Have you ever done that?","What does being 'one' mean in the film One? Can you think of one thing that makes you 'one of a kind'?","If a friend moved to a new city, what would you want them to know about themselves that they might forget?"],panel:"The main character in Wade keeps everything inside. Is that brave, or is it harmful? What would you tell them if you could step into the film?",activity:"Students draw a self-portrait: what the world sees outside, and what they feel inside. Shared only if they choose."},
-    {num:"Week 2",theme:"Seeing through someone else's eyes",films:[
-      {title:"Perspective",badge:"Short",lang:"Marathi/Hindi",meta:"India · Adinath Kothare · ~15 min",link:"https://www.youtube.com/results?search_query=Perspective+short+film+Adinath+Kothare",addresses:"How the same situation looks different depending on where you stand",learns:"Pause before judging — the core of empathy."},
-      {title:"Neighbours",badge:"Short",lang:"No dialogue",meta:"Canada · Norman McLaren · 1952 · 8 min",link:"https://www.nfb.ca/film/neighbours_voisins/",addresses:"Conflict escalation, greed, how neighbours become enemies",learns:"How perspective and ego fuel conflict — and how quickly it spirals."},
-      {title:"The Present",badge:"Short",lang:"English",meta:"Germany · 2014 · 4 min · Animated",link:"https://www.youtube.com/watch?v=WjqiU5FgsYc",addresses:"Disability, assumption, and unexpected joy",learns:"Challenge first impressions and find common ground through play."}
-    ],questions:["In Perspective, who do you think was 'right'? Is there a right answer?","In Neighbours, at what exact moment could the fight have been stopped?","What assumption did the boy in The Present make? Have you ever made a wrong assumption about someone?"],panel:"Norman McLaren made Neighbours in 1952 as a statement against war. Is the film still relevant today?",activity:"Partner exercise: share one misunderstanding, then retell it from the other person's perspective."},
-    {num:"Week 3",theme:"Girls & boys — who decides?",films:[
-      {title:"Stanley Ka Dabba",badge:"Excerpt",lang:"Hindi",meta:"India · 2011 · 15 min clip",link:"https://www.youtube.com/results?search_query=Stanley+Ka+Dabba+full+film",addresses:"Class difference, food, dignity and friendship",learns:"How economic inequality shows up in everyday school settings."},
-      {title:"Choti Si Baat",badge:"Short",lang:"Hindi",meta:"India · ~10 min",link:"https://www.youtube.com/results?search_query=Choti+si+baat+short+film+gender",addresses:"Gender expectations and everyday courage",learns:"Question 'boys do this / girls do that' norms in everyday life."},
-      {title:"Alike",badge:"Short",lang:"No dialogue",meta:"Spain · 2015 · 8 min · Animated",link:"https://www.youtube.com/watch?v=B5GHsOd88bY",addresses:"Conformity suppresses joy; creativity restores colour",learns:"The cost of forcing children into a mould."}
-    ],questions:["What 'rule' about boys or girls have you been told that you never questioned?","In Alike, the world loses colour when the child stops playing freely. What does 'colour' represent in your own life?","Why does Stanley not tell anyone about his home situation?"],panel:"If you could change one gender rule that exists in your home or school, what would it be and why?",activity:"Anonymous reflection cards: 'A rule about boys or girls I've been told — do I agree?' Read aloud, discussed without naming anyone."},
-    {num:"Week 4",theme:"Village, city & what home means",films:[
-      {title:"Two",badge:"Short",lang:"Bengali",meta:"India · Satyajit Ray · 1964 · 12 min",link:"https://www.youtube.com/results?search_query=Two+short+film+Satyajit+Ray+1964",addresses:"A rich boy's toys vs a poor boy's creativity — wordless",learns:"Inequality, pride, ingenuity — joy doesn't require wealth."},
-      {title:"Accordion",badge:"Short",lang:"Persian",meta:"Iran · Jafar Panahi · 2010 · 22 min",link:"https://www.youtube.com/results?search_query=Accordion+short+film+Jafar+Panahi",addresses:"Poverty, generosity, humanity in small moments",learns:"Kindness across class lines is possible — even without words."},
-      {title:"Gattu",badge:"Short Film",lang:"Hindi",meta:"India · 2012 · 30 min",link:"https://www.youtube.com/results?search_query=Gattu+2012+Hindi+short+film",addresses:"A street child's desire for education, kite as freedom",learns:"The right to education and the barriers children face."}
-    ],questions:["In Two, neither child speaks yet everything is said. What does the poor boy feel?","In Accordion, does the chain of giving make everyone equally happy? Why or why not?","Gattu wants one thing — school. What does school mean to you?"],panel:"All three films had no or very little dialogue. Is that a strength or a weakness in storytelling?",activity:"Map of my world: students draw home, school, favourite place, and a place they want to reach."}
-  ]},
-  {title:"The World Around Us",sub:"Climate, water, forests, animals & our future",months:"September – November",why:"Climate change is not abstract for these children — it shows up as floods, heat, and water scarcity. This term names it and links local experience to global science.",what:"How ecosystems connect; India's environmental history; the link between poverty and climate vulnerability; and what community action looks like.",how:"Builds environmental agency — replacing eco-anxiety with informed action. Connects curriculum to the SDGs.",weeks:[
-    {num:"Week 5",theme:"Water: life, scarcity & who suffers first",films:[
-      {title:"Jaldhara",badge:"Short Doc",lang:"Hindi",meta:"India · ~12 min",link:"https://www.youtube.com/results?search_query=Jaldhara+water+scarcity+India+documentary",addresses:"Water scarcity in rural India, drought, farming communities",learns:"How climate change hits farming families first; water as shared responsibility."},
-      {title:"The Dam Keeper",badge:"Short",lang:"English",meta:"USA · 2014 · 18 min · Oscar-nominated",link:"https://www.youtube.com/results?search_query=The+Dam+Keeper+short+film+2014",addresses:"Pollution, loneliness, one person's quiet duty",learns:"When we neglect the keeper, the whole community suffers."},
-      {title:"Pani Re Pani",badge:"Short",lang:"Hindi",meta:"India · ~8 min",link:"https://www.youtube.com/results?search_query=Pani+Re+Pani+water+conservation+Hindi+short+film",addresses:"Everyday water waste vs rural water poverty",learns:"Connect personal habits to a larger crisis — and act at home."}
-    ],questions:["Who collects water in your home? Who collects it in the village in Jaldhara? Why is it often women and girls?","The Dam Keeper keeps running the windmill even though everyone ignores him. Is that fair?","How many litres of water does your family use in a day? What could you change?"],panel:"If water became so scarce that your school only had water for one hour a day, how would you decide who gets it first?",activity:"Data walk: groups calculate classroom water use for a week. One group proposes a water-saving rule for the school."},
-    {num:"Week 6",theme:"Trees, forests & the people who protect them",films:[
-      {title:"Chipko — Ek Andolan",badge:"Short Doc",lang:"Hindi",meta:"India · ~10 min",link:"https://www.youtube.com/results?search_query=Chipko+movement+documentary+short+Hindi",addresses:"Deforestation, community resistance, women's leadership",learns:"History of Chipko; how ordinary women changed environmental history."},
-      {title:"The Man Who Planted Trees",badge:"Short",lang:"English/French",meta:"Canada · 1987 · 30 min · Oscar winner",link:"https://www.youtube.com/watch?v=JNe79tBJUoY",addresses:"Individual persistence transforming a barren valley",learns:"Individual persistence — even unrecognised — creates enormous change."},
-      {title:"Once There Were Trees",badge:"Short",lang:"English",meta:"Animated short · ~7 min",link:"https://www.youtube.com/results?search_query=Once+there+were+trees+animated+short+film",addresses:"Environmental loss through a child's memory",learns:"Visualise environmental loss before it happens — and act preventively."}
-    ],questions:["The Chipko women used their bodies to stop machines. Can you think of other non-violent resistance examples?","Elzeard Bouffier planted trees for decades without anyone watching. Why would someone do that?","If the trees near your school were going to be cut down tomorrow, what would you do?"],panel:"The Chipko movement was started by women who were not politicians or scientists. What gave them the right to protect the forest?",activity:"Each student plants a seedling. They commit to caring for it and bring it to the Year-End Film Festival."},
-    {num:"Week 7",theme:"Plastic, oceans & what we throw away",films:[
-      {title:"Kadal Mazhai (Sea Rain)",badge:"Short",lang:"Tamil",meta:"India · ~10 min",link:"https://www.youtube.com/results?search_query=Kadal+Mazhai+Tamil+short+film+sea",addresses:"Ocean plastic and coastal fishing communities in Tamil Nadu",learns:"Plastic waste travels from cities to shores, hurting people who depend on the sea."},
-      {title:"Plastic Ocean",badge:"Short Doc",lang:"English",meta:"~8 min · Documentary excerpt",link:"https://www.youtube.com/results?search_query=plastic+ocean+short+documentary+children",addresses:"Journey of a single-use plastic item from manufacture to ocean floor",learns:"See the lifecycle of an object beyond the bin."},
-      {title:"Paperman",badge:"Short",lang:"No dialogue",meta:"Disney · 2012 · 6 min · Oscar winner",link:"https://www.youtube.com/results?search_query=Paperman+Disney+short+film",addresses:"Risk, hope and not giving up",learns:"Emotional counterbalance — light and hopeful to close on possibility."}
-    ],questions:["Who is responsible for ocean plastic — the person who drops it, the company, or the government?","The fishing families in Kadal Mazhai didn't create the plastic problem. Is that fair?","What is one plastic item you use every day that you could replace with something else?"],panel:"India has passed laws banning single-use plastic. Why are plastic bags still everywhere? Who is not following the rules — and why?",activity:"One-day plastic audit: each student tracks every piece of plastic they touch. Results visualised on a class chart."},
-    {num:"Week 8",theme:"Animals & humans — sharing a shrinking world",films:[
-      {title:"Elephant in the Room",badge:"Short Doc",lang:"Hindi/English",meta:"India · ~12 min",link:"https://www.youtube.com/results?search_query=human+elephant+conflict+India+short+documentary",addresses:"Elephants entering villages as forests shrink",learns:"See conflict from both the farmer's and the elephant's perspective — neither is the villain."},
-      {title:"Creature Comforts",badge:"Short",lang:"English",meta:"UK · Nick Park · 1989 · 5 min · Oscar winner",link:"https://www.youtube.com/results?search_query=Creature+Comforts+Nick+Park+1989",addresses:"Zoo animals' dissatisfaction with their space",learns:"Question captivity and what 'care' really means for another species."},
-      {title:"Community Wildlife Protection",badge:"Short Doc",lang:"Hindi",meta:"India · ~8 min",link:"https://www.youtube.com/results?search_query=wildlife+conservation+India+short+documentary+community",addresses:"Community-led wildlife protection in India",learns:"Co-existence models that work — ordinary people as guardians."}
-    ],questions:["Whose fault is it when an elephant destroys a farmer's field — the elephant, the farmer, or someone else?","In Creature Comforts, the animals have food and shelter but aren't happy. What does that tell us about what living things really need?","Is it ever okay to harm an animal to protect a human?"],panel:"Design a neighbourhood where humans and one other species could live together. What rules would you need?",activity:"Groups design a 'co-existence corridor' — a drawing of how one animal species could safely share land near the school."},
-    {num:"Week 9",theme:"Climate & the future — from fear to action",films:[
-      {title:"Dear Future Children",badge:"Short Excerpt",lang:"English",meta:"International · 2021 · 10 min excerpt",link:"https://www.youtube.com/results?search_query=Dear+Future+Children+documentary+2021+climate",addresses:"Young climate activists from Hong Kong, Chile and Uganda",learns:"Children the same age are leading climate action — fear can become fuel."},
-      {title:"2047: Sights of Tomorrow",badge:"Short",lang:"English/Hindi",meta:"~8 min short series clip",link:"https://www.youtube.com/results?search_query=2047+Sights+of+Tomorrow+climate+short+film",addresses:"What Indian cities could look like under different climate scenarios",learns:"The future is not fixed — choices made now create it."},
-      {title:"Wall-E (Opening Sequence)",badge:"Excerpt",lang:"No dialogue",meta:"Pixar · 2008 · First 8 min",link:"https://www.youtube.com/results?search_query=Wall-E+opening+sequence+Earth",addresses:"An Earth abandoned due to waste and consumption",learns:"Viscerally, what 'too late' looks like — and why it matters to act now."}
-    ],questions:["What is the difference between fear that stops you and fear that moves you?","If you could write one law to protect the climate by 2047, what would it be?","Wall-E is alone on Earth. What is the film saying about what happens when humans forget to care?"],panel:"You are 10 years old today. In 2047 you will be 33. Write the first sentence of a letter from your future self about what you did — or didn't do — for the planet.",activity:"Letter to 2047: students write a one-paragraph letter from their future self. Sealed and kept until Grade 10."}
-  ]},
-  {title:"Feelings Are Real",sub:"Mental health, grief, courage & kindness",months:"December – January",why:"Indian children are often taught to suppress emotions. The winter period is also a time of family gatherings and sometimes heightened stress — a perfect moment to build emotional vocabulary.",what:"Names for complex feelings; that sadness, fear and grief are normal; how to express anger without harm; and that small acts of kindness change lives.",how:"Reduces stigma around mental health; gives students tools to support themselves and peers; builds a classroom culture of safety, trust and care.",weeks:[
-    {num:"Week 10",theme:"Fear, courage & the brave act",films:[
-      {title:"Natkhat",badge:"Short Film",lang:"Hindi",meta:"India · 2020 · 30 min · National Award winner",link:"https://www.youtube.com/results?search_query=Natkhat+short+film+2020+Hindi",addresses:"A mother using storytelling to teach about gender violence",learns:"Age-appropriate understanding of fear in the home and the courage to question inherited norms."},
-      {title:"Taare Zameen Par",badge:"Excerpt",lang:"Hindi",meta:"India · 2007 · 15 min clip",link:"https://www.youtube.com/results?search_query=Taare+Zameen+Par+classroom+scene",addresses:"A child's invisible struggle with dyslexia",learns:"Some battles are completely hidden — being seen changes everything."},
-      {title:"Brave Animated Short",badge:"Short",lang:"English",meta:"~5 min · Animated",link:"https://www.youtube.com/results?search_query=courage+fear+animated+short+film+children",addresses:"Courage as action despite fear",learns:"Bravery is not the absence of fear — it is moving forward anyway."}
-    ],questions:["The mother in Natkhat teaches through story. Why does she use a story instead of telling her son directly?","Ishaan in Taare Zameen Par is clearly struggling. Why does no one notice for so long?","Is there something you are afraid of that you've never told anyone? Think about why you keep it private."],panel:"The bravest thing a person can do is sometimes ask for help. Do you agree? When is asking for help harder than facing the fear alone?",activity:"Fear map: students draw one fear as a monster or obstacle, and beside it, one small step they could take toward it."},
-    {num:"Week 11",theme:"Grief, loss & the things we carry",films:[
-      {title:"The Red Balloon",badge:"Short Film",lang:"No dialogue",meta:"France · 1956 · 34 min · Palme d'Or winner",link:"https://www.youtube.com/results?search_query=The+Red+Balloon+1956+full+film",addresses:"Joy, loss, grief and the imagination as healing",learns:"Loss is transformed, not erased, when we let imagination and community in."},
-      {title:"Chhota Sa Ghar",badge:"Short",lang:"Hindi",meta:"India · ~12 min",link:"https://www.youtube.com/results?search_query=Chhota+sa+ghar+Hindi+short+film+grief",addresses:"Loss of a grandparent, memory and grief in a family",learns:"Sadness after loss is natural and not shameful — memories are a form of keeping."},
-      {title:"Goodbye Things",badge:"Short",lang:"English",meta:"Animated short · ~6 min",link:"https://www.youtube.com/results?search_query=grief+loss+animated+short+film+children",addresses:"The process of letting go while holding on",learns:"Grief is not forgetting — it is changing the shape of love."}
-    ],questions:["Pascal's balloon is destroyed. What do you think the ending of The Red Balloon means?","In Indian families, grief is often kept quiet. Is there a difference between being 'strong' and not talking about sadness?","What do you do to feel better when you miss someone or something you've lost?"],panel:"Is it okay to feel sad in school? What happens when a student is grieving and no one knows?",activity:"Memory box: students bring or draw one object that reminds them of someone they miss. Class creates a collective memory wall."},
-    {num:"Week 12",theme:"Anger, fairness & speaking up",films:[
-      {title:"For the Birds",badge:"Short",lang:"No dialogue",meta:"Pixar · 2000 · 3 min · Oscar winner",link:"https://www.youtube.com/watch?v=nYTrIcn4rjg",addresses:"Bullying, exclusion and consequences",learns:"Bullying dynamics without heavy-handedness — the bully's behaviour backfires."},
-      {title:"Alag",badge:"Short",lang:"Hindi",meta:"India · ~15 min",link:"https://www.youtube.com/results?search_query=Alag+Hindi+short+film+exclusion+school",addresses:"Being left out and the anger it creates",learns:"Righteous anger (a signal something is wrong) vs reactive anger (that hurts others)."},
-      {title:"Do Boond Paani",badge:"Excerpt",lang:"Hindi",meta:"India · ~12 min clip",link:"https://www.youtube.com/results?search_query=Do+Boond+Paani+Hindi+film+clip",addresses:"Injustice and the courage to speak up",learns:"The value of naming unfairness and the power of community solidarity."}
-    ],questions:["In For the Birds, the small birds bully the big bird. Why do people bully someone different — even when they've done nothing wrong?","Have you ever been angry because something was unfair? What did you do — and what do you wish you had done?","Is there a difference between 'getting angry' and 'standing up'?"],panel:"There is a rule in your school that you think is deeply unfair. You feel angry. What is the most effective thing you can do?",activity:"Scenario cards: small groups role-play expressing anger without hurting others. Debrief: what worked? What made things worse?"},
-    {num:"Week 13",theme:"Kindness, mental wellness & being seen",films:[
-      {title:"Lou",badge:"Short",lang:"No dialogue",meta:"Pixar · 2017 · 7 min · Oscar winner",link:"https://www.youtube.com/results?search_query=Lou+Pixar+short+film+2017",addresses:"What drives a bully — the transformative power of being seen",learns:"Behind most difficult behaviour is an unmet need."},
-      {title:"Paro",badge:"Short",lang:"Hindi",meta:"India · ~10 min",link:"https://www.youtube.com/results?search_query=Paro+Hindi+short+film+mental+health",addresses:"Depression as a loss of colour — small kindnesses restore it",learns:"Some people feel 'grey' inside — noticing and reaching out actually matters."},
-      {title:"Inner Workings",badge:"Short",lang:"No dialogue",meta:"Disney · 2016 · 6 min",link:"https://www.youtube.com/results?search_query=Inner+Workings+Disney+short+film+2016",addresses:"The battle between heart and mind — joy vs routine",learns:"Listen to what your body tells you; make space for joy."}
-    ],questions:["In Lou, the bully was bullied first. Does knowing that change how you feel about him? Does it excuse his behaviour?","If a friend seemed 'grey' or withdrawn like the character in Paro, what would you say to them?","The man in Inner Workings ignores his heart to be 'responsible'. When is it important to break the rules for your own wellbeing?"],panel:"Think of the kindest thing anyone has ever done for you. Did it take courage? What stopped you at first?",activity:"Kindness wall: each student pins one anonymous act of kindness they commit to before the next Saturday."}
-  ]},
-  {title:"Justice & the Bigger World",sub:"Caste, poverty, gender, communal harmony & filmmaking",months:"February – April",why:"By Term 4, students have the emotional vocabulary to engage with India's harder social realities — caste, gender, poverty — with nuance rather than shock.",what:"The systemic roots of injustice; the history of resistance in India; how their own lives are shaped by structures they didn't choose — and that they can question them.",how:"Builds critical civic consciousness; equips students with constitutional values (equality, dignity); positions them as agents of change, not only witnesses of injustice.",weeks:[
-    {num:"Week 14",theme:"Poverty, dignity & the right to dream",films:[
-      {title:"Nil Battey Sannata",badge:"Excerpt",lang:"Hindi",meta:"India · 2015 · 15 min clip",link:"https://www.youtube.com/results?search_query=Nil+Battey+Sannata+clip+school",addresses:"A cleaning worker studies in her daughter's class to inspire her",learns:"Intergenerational aspiration — dreams are not limited by what parents could not achieve."},
-      {title:"Street Kart",badge:"Short",lang:"Hindi",meta:"India · ~8 min",link:"https://www.youtube.com/results?search_query=Street+Kart+Hindi+short+film",addresses:"Street children finding dignity and joy",learns:"Dignity is not given by wealth — it is claimed through small acts of creativity and pride."},
-      {title:"Accordion (Justice lens)",badge:"Short",lang:"Persian",meta:"Iran · Jafar Panahi · 2010 · Revisit",link:"https://www.youtube.com/results?search_query=Accordion+short+film+Jafar+Panahi+2010",addresses:"Revisit with a justice lens: who should prevent this poverty?",learns:"Apply the full year's learning: why does poverty create the need for this chain of generosity?"}
-    ],questions:["Why does the mother in Nil Battey Sannata have to sit in a school class to convince her daughter? What does that say about the system?","The children in Street Kart don't have much — but they have joy. Is joy something that can be taken away by poverty?","Revisiting Accordion: who really solves the poverty problem in this film? Does the chain of giving fix anything permanently?"],panel:"Is it the job of individuals to help poor people — or the government's? What should each be responsible for?",activity:"Barrier mapping: groups draw 'obstacle maps' — what stops a child from staying in school? Then propose one solution per obstacle."},
-    {num:"Week 15",theme:"Caste, equality & what the Constitution says",films:[
-      {title:"Fandry",badge:"Excerpt",lang:"Marathi",meta:"India · 2013 · 20 min · National Award winner",link:"https://www.youtube.com/results?search_query=Fandry+Marathi+film+2013+excerpt",addresses:"Caste humiliation through a young boy's eyes — ⚠️ Teacher: prepare safe space",learns:"Caste as a lived, daily experience — not an abstract historical fact."},
-      {title:"Jai Bhim (Opening excerpt)",badge:"Excerpt",lang:"Tamil",meta:"India · 2021 · 10 min clip",link:"https://www.youtube.com/results?search_query=Jai+Bhim+Tamil+film+opening+scene",addresses:"A Dalit family fighting for justice through the courts",learns:"How legal systems can fight caste discrimination — and who Ambedkar was."},
-      {title:"Annihilation of Caste (Animated)",badge:"Short",lang:"Hindi",meta:"India · ~8 min · Educational animation",link:"https://www.youtube.com/results?search_query=Ambedkar+annihilation+of+caste+animated+explainer+Hindi",addresses:"Ambedkar's ideas on equality; the Constitution's promises",learns:"India's constitutional commitment to equality and what it means in practice."}
-    ],questions:["In Fandry, Jabya's caste is never said aloud — but everyone knows. How is something this powerful communicated without words?","The Indian Constitution says all citizens are equal. If that's true, why does caste still affect people's lives in 2024?","What is one caste-based assumption or behaviour you have witnessed in a family, neighbourhood, or media story?"],panel:"Dr. Ambedkar said a person's worth should not be decided by the family they were born into. Is there any way we still judge people by their birth?",activity:"Structured dialogue: 'A rule that is unfair — where did it come from and how could it change?'"},
-    {num:"Week 16",theme:"Women who changed things",films:[
-      {title:"Phullu",badge:"Excerpt",lang:"Hindi",meta:"India · 2017 · 15 min clip",link:"https://www.youtube.com/results?search_query=Phullu+2017+Hindi+film+menstrual+health",addresses:"Menstrual health, stigma and rural women's health champions",learns:"Break silence around a topic that affects half the population — celebrate those who fought stigma."},
-      {title:"Natkhat (revisit)",badge:"Short",lang:"Hindi",meta:"India · 2020 · Re-watch key scene",link:"https://www.youtube.com/results?search_query=Natkhat+2020+short+film",addresses:"Revisit to discuss the mother's courage and soft power",learns:"How story can teach without confrontation — a model of patient change-making."},
-      {title:"Daughters of Mother India",badge:"Short Doc",lang:"Hindi",meta:"India · ~10 min · Documentary",link:"https://www.youtube.com/results?search_query=Daughters+of+Mother+India+documentary+women+India",addresses:"Women at the frontline of change in India",learns:"Change is made by ordinary women doing extraordinary things, not only famous leaders."}
-    ],questions:["Why is menstrual health still a topic people find uncomfortable? What would change if it weren't?","The mother in Natkhat doesn't fight — she tells a story. Can you think of a time a story changed someone's mind?","Name one woman — from your family or neighbourhood — who made something better. What did she sacrifice?"],panel:"Is it harder to be a woman who changes things in India than a man who changes things? Why or why not?",activity:"Interview project: each student interviews one woman in their family about a challenge she faced. Presented as a 2-minute oral story."},
-    {num:"Week 17",theme:"Peace, harmony & living together",films:[
-      {title:"Neighbours (McLaren, revisit)",badge:"Short",lang:"No dialogue",meta:"Canada · 1952 · 8 min — revisit as peace study",link:"https://www.nfb.ca/film/neighbours_voisins/",addresses:"Revisit: conflict escalation and peace — could the characters have chosen differently?",learns:"Apply the full year's learning to one of the first films we watched."},
-      {title:"Strangers",badge:"Short",lang:"English",meta:"Animated short · ~4 min",link:"https://www.youtube.com/results?search_query=Strangers+animated+short+film+prejudice",addresses:"Prejudice dissolving through unexpected human connection",learns:"Fear of 'the other' dissolves the moment we recognise our shared humanity."},
-      {title:"Gandhi — The Early Years",badge:"Short Doc",lang:"Hindi",meta:"India · ~10 min · Educational",link:"https://www.youtube.com/results?search_query=Gandhi+non-violence+short+documentary+Hindi+children",addresses:"Gandhi's methods of non-violent resistance at a child-accessible level",learns:"Peaceful resistance is not weakness — it is extraordinary discipline and courage."}
-    ],questions:["Watching Neighbours again — at which moment could you have intervened as a bystander?","In Strangers, fear disappears when people actually talk. Is there a group you are afraid of without really knowing them?","Gandhi said 'be the change.' Is that inspiring or is it too much to ask of ordinary people?"],panel:"You have watched films all year about conflict, injustice, grief and hope. If you had to name one thing you now believe that you didn't believe in June — what is it?",activity:"Peace pledge mural: the whole class collaborates on a large artwork around 'what I will protect.'"},
-    {num:"Week 18",theme:"🎬 Year-End Film Festival — students become filmmakers",films:[
-      {title:"Student-made short films",badge:"Student Work",lang:"Any",meta:"2–5 min each · phone video, flipbook, or animation",link:"#showcase",addresses:"All themes from the year — chosen by each student or group",learns:"Students synthesise their year's learning by telling a story in their own voice."},
-      {title:"Class vote screening",badge:"Student Choice",lang:"Any",meta:"Voted by the class from the full year's list",link:"#curriculum",addresses:"Student agency and celebration of the year's journey",learns:"Articulate why a film mattered — practising critical film vocabulary."},
-      {title:"Panel discussion + seedling ceremony",badge:"Festival",lang:"Any",meta:"Week 18 celebration",link:"#showcase",addresses:"The full year, synthesised",learns:"Students reflect as critics, creators, and citizens — not just viewers."}
-    ],questions:["What is the most important thing you learned this year — not a fact, but something you now believe?","Which film changed how you see someone in your own life?","If you could make one more short film about something that matters to you, what would it be about?"],panel:"Students take roles (Director, Critic, Activist, Audience, Journalist) and hold a formal panel. Opening prompt: 'This year, our class watched stories about water, trees, fear, caste, kindness and war. What kind of world do we want to build — and what will we do first?'",activity:"Film festival: student films screened to parents and other classes. Seedlings from Week 6 gifted to guests. Letters to 2047 held for safekeeping until Grade 10."}
-  ]}
-];
-
-let activeTerm=0;
-
-function switchTerm(idx){
-  activeTerm=idx;
-  document.querySelectorAll('.term-tile').forEach((t,i)=>t.classList.toggle('active',i===idx));
-  renderWeeks();
-}
-
-function renderWeeks(){
-  const t=terms[activeTerm];
-  const colors=['var(--gold)','#7EC87E','#E8907A','#C87EC8'];
-  const c=colors[activeTerm];
-  let html=`<div class="weeks-header">
-    <h3 style="color:${c}">${t.title}</h3>
-    <p style="color:var(--muted);font-size:14px;margin-top:6px">${t.months}</p>
-  </div>
-  <div class="term-why-row">
-    <div class="term-why-box"><h5>Why this term</h5><p>${t.why}</p></div>
-    <div class="term-why-box"><h5>What they learn</h5><p>${t.what}</p></div>
-    <div class="term-why-box"><h5>How it benefits them</h5><p>${t.how}</p></div>
-  </div>`;
-  t.weeks.forEach((w,wi)=>{
-    const wid=`acc_${activeTerm}_${wi}`;
-    html+=`<div class="week-accordion">
-      <div class="week-acc-head" id="head_${wid}" onclick="toggleWeek('${wid}')">
-        <span class="wk-badge" style="background:rgba(201,168,76,0.1);color:${c}">${w.num}</span>
-        <span class="wk-title">${w.theme}</span>
-        <span class="wk-films-count">${w.films.length} films</span>
-        <span class="wk-chevron">▼</span>
-      </div>
-      <div class="week-acc-body" id="body_${wid}">`;
-    w.films.forEach(f=>{
-      html+=`<div class="film-entry">
-        <div>
-          <div class="film-entry-title">${f.title}<span class="short-badge">${f.badge}</span><span class="lang-badge">${f.lang}</span></div>
-          <div class="film-entry-meta">${f.meta}</div>
-          <a class="film-link" href="${f.link}" target="_blank" rel="noopener">🔗 Find film</a>
-        </div>
-        <div class="film-entry-addresses"><strong>Addresses:</strong><br>${f.addresses}</div>
-        <div class="film-entry-learns"><strong>Students learn:</strong><br>${f.learns}</div>
-      </div>`;
-    });
-    html+=`<div class="dq-section">
-      <div class="dq-label">Discussion questions</div>
-      <ul class="dq-list">`;
-    w.questions.forEach(q=>{html+=`<li>${q}</li>`;});
-    html+=`</ul>
-      <div class="panel-box">
-        <h5>🎤 Student-Led Discussion Panel</h5>
-        <div class="panel-roles">
-          <span class="role-chip">Questioner</span><span class="role-chip">Devil's Advocate</span><span class="role-chip">Connector</span><span class="role-chip">Summariser</span>
-        </div>
-        <div class="panel-prompt">"${w.panel}"</div>
-      </div>
-      <div class="activity-box"><strong>Activity</strong><p>${w.activity}</p></div>
-    </div></div></div>`;
-  });
-  document.getElementById('weeksContainer').innerHTML=html;
-}
-
-function toggleWeek(wid){
-  const head=document.getElementById('head_'+wid);
-  const body=document.getElementById('body_'+wid);
-  const isOpen=head.classList.contains('open');
-  head.classList.toggle('open',!isOpen);
-  body.classList.toggle('open',!isOpen);
-}
-
-window.addEventListener('DOMContentLoaded',()=>{
-  buildFilmStrip();
-  renderWeeks();
-  initReveal();
-});
-</script>
 </body>
 </html>
-HTMLEOF
-echo "curriculum.html done"
-Output
-
-curriculum.html done
